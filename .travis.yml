@@ -7,6 +7,10 @@ cache:
 script:
   - npm test
   - npm run build
+
+after_success:
+  - .travis/after_success.sh
+
 deploy:
   provider: pages
   skip_cleanup: true
