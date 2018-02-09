@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button , Table , Icon , Row , Col , ProgressBar , Input , Section } from 'react-materialize'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {  Icon , Row , Col  , Input , Section ,Button } from 'react-materialize'
 
 class Home extends Component {
 
@@ -24,7 +23,9 @@ class Home extends Component {
       <Section>
         <Row className='center'>
         <Col offset="s4" s={4}>
-          <input />
+          <Row>
+            <Input s={12} label="Name1"><Button className='right'><Icon>search</Icon></Button></Input>
+          </Row>         
         </Col>
 
         </Row>
