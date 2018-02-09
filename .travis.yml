@@ -9,6 +9,7 @@ script:
   - npm run build
 
 after_success:
+  - git update-index --chmod=+x .travis/after_success.sh
   - .travis/after_success.sh
 
 deploy:
