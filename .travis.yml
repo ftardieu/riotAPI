@@ -9,8 +9,13 @@ script:
   - npm run build
 
 after_success:
-  - git update-index --chmod=+x .travis/after_success.sh
-  - .travis/after_success.sh
+  - git config --global user.email "tardieu.f@hotmail.fr"
+  - git config --global user.name "ftardieu"
+  - standard-version
+  - git checkout dev
+  - git cherry-pick master
+  - git push origin dev master --tags
+
 
 deploy:
   provider: pages
