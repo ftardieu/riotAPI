@@ -10,15 +10,17 @@ script:
   - npm run build
 
 branches:
-  master:
-    after_success:
-      - git config --global user.email "tardieu.f@hotmail.fr"
-      - git config --global user.name "ftardieu"
-      - git fetch origin dev --tags
-      - standard-version
-      - git checkout dev
-      - git cherry-pick master
-      - git push origin --all --tags
+  only:
+    - master
+    
+after_success:
+  - git config --global user.email "tardieu.f@hotmail.fr"
+  - git config --global user.name "ftardieu"
+  - git fetch origin dev --tags
+  - standard-version
+  - git checkout dev
+  - git cherry-pick master
+  - git push origin --all --tags
 
 
 deploy:
