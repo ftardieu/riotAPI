@@ -16,7 +16,7 @@ after_success:
   - standard-version
   - git checkout dev
   - git cherry-pick master
-  - git push origin --all --tags
+  - git push origin --tags
 
 deploy:
   provider: pages
