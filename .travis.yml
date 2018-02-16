@@ -9,10 +9,6 @@ script:
   - npm test
   - npm run build
 
-branches:
-  only:
-    - master
-    
 after_success:
   - git config --global user.email "tardieu.f@hotmail.fr"
   - git config --global user.name "ftardieu"
@@ -21,7 +17,6 @@ after_success:
   - git checkout dev
   - git cherry-pick master
   - git push origin --all --tags
-
 
 deploy:
   provider: pages
