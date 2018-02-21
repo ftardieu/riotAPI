@@ -4,18 +4,25 @@ node_js:
 cache:
   directories:
   - node_modules
+
+branches:
+  only:
+    - master
+
+before_script:
+  - git config --global user.email "tardieu.f@hotmail.fr"
+  - git config --global user.name "ftardieu"
+
 script:
   - npm test
   - npm run build
 
 after_success:
-  - git config --global user.email "tardieu.f@hotmail.fr"
-  - git config --global user.name "ftardieu"
+  - git fetch origin dev:dev master:master --tags
   - standard-version
   - git checkout dev
   - git cherry-pick master
-  - git push origin dev master --tags
-
+  - git push origin --tags
 
 deploy:
   provider: pages
