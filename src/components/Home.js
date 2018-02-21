@@ -1,64 +1,70 @@
-import React, { Component } from 'react';
-import  { key } from '../config';
+import React, { Component } from 'react'
 import {  Icon , Row , Col  , Input , Section ,Button } from 'react-materialize'
-import Summoner from './Summoner';
+import Summoner from './Summoner'
+import SummonerError from './Error'
+import api from '../riotAPI'
 
 class Home extends Component {
+  state = {
+    name: "",
+    sumData: null,
+    error:false
+  }
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      search : "",
-      SummonerDatas : []
+  handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
+      this.makeRequest(this.state.name)
     }
   }
 
-  handleChange = (event) => {
-    this.setState({search: event.target.value});
+  handleClick = () => {
+    const { name } = this.state
+    this.makeRequest(name)
   }
 
-  handleSubmit = (event) => {
-    console.log('A name was submitted: ' + this.state.search);
+  makeRequest = async (name) =>{
+    var error = this.state.error;
+    var sumData = this.state.sumdata;
+    const response = await api.getSummonerByName("euw1",name);
+    const statutResponse = response.ok ; 
+    if (statutResponse) {
+      sumData = await response.json()
+      error = false;
+    }else{
+      sumData = "";
+      error = true;
+    }
 
-    fetch("https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+ this.state.search +"?api_key=" + key).then(result =>{ 
-      return result.json();
-    }).then(SummonerDatas => {
-       this.setState({SummonerDatas});
+    this.setState({ sumData , error  , name : ""})
 
-    }).catch(err => {
-      console.log(err);
-    })
-    event.preventDefault();
   }
 
-  componentDidMount() {
-
-  }
 
 
 
-  render() {
-    return (
+  render(){
+    const { name, sumData, error } = this.state
+    return(
+      <React.Fragment>
+        <Section>
 
-      <Section>
-      <form onSubmit={this.handleSubmit}>
           <Row className='center'>
             <Col offset="s4" s={4}>
               <Row>
-                <Input s={12} label="Name1" onChange={this.handleChange} value={this.state.search}><Button floating><Icon>search</Icon></Button></Input>
+                  <Input s={12} onKeyPress={this.handleEnterKey} onChange={(e) => this.setState({ name: e.target.value })} value = { name } required label="Name1" >
+                    <Button onClick={this.handleClick} floating><Icon>search</Icon></Button>
+                  </Input>
               </Row>         
             </Col>
 
           </Row>
-        </form>
-         <Summoner SummonerDatas={this.state.SummonerDatas}
-                ref={(component) => {
+        {sumData ? <Summoner sumData={sumData} id={sumData.id} accountId = {sumData.accountId} /> : null}
+        {error ? <SummonerError /> : null}
+        </Section>
 
-
-                }}/>
-      </Section>
-    );
+      </React.Fragment>
+      )
   }
 }
 
