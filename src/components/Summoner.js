@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Row , Section } from 'react-materialize'
+import {  Icon , Input, Button, Section } from 'react-materialize'
 import api from '../riotAPI'
 import SummonerLeague from './SummonerLeague'
 import SummonerMatch from './SummonerMatch'
@@ -46,22 +46,27 @@ class Summoner extends Component {
 
   render(){
     const { sumLeagueInfo ,id  , sumMatchList } = this.state
-    const { name , profileIconId , revisionDate,summonerLevel  } = this.props.sumData;
+    const { name, profileIconId, summonerLevel  } = this.props.sumData;
     const profileIcon  = api.getSUmmonerProfileIcon(profileIconId)
-    console.log(this.props.sumData);
     return(
       <React.Fragment>
-        <Section>
-           <Row >
-            <span>{name}</span>
-            <img alt = 'profileIcon' src = {profileIcon}></img>
-            <p>{revisionDate}</p>
-            <p>{summonerLevel}</p>
-            { sumLeagueInfo && sumLeagueInfo.length > 0  ? <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/> : <BlankComponent />}   
-            { sumMatchList && sumMatchList.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}   
+       <div className="summoner-info">
+           <div className="summoner-face">
+               <img className="summoner-icon" alt='profileIcon' src={profileIcon}></img>
+               <span className="summoner-level">{summonerLevel}</span>
+           </div>
+           <div className="summoner-profile">
+               <div>
+                   <span className="summoner-name">{name}</span>
+               </div>
+               <div>
+                   {/*<Button onClick={this.handleClick} floating><Icon>refresh</Icon></Button>*/}
+               </div>
+           </div>
+       </div>
 
-           </Row>
-        </Section>
+        { sumLeagueInfo && sumLeagueInfo.length > 0  ? <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/> : <BlankComponent />}
+        { sumMatchList && sumMatchList.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
       </React.Fragment>
     )
   }
