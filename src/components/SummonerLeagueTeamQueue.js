@@ -14,9 +14,7 @@ class SummonerLeagueTeamQueue extends Component {
   }
  
 
- componentDidMount = async () => {
-     
-  }
+
 
 
   render(){

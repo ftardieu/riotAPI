@@ -2,30 +2,14 @@ import React, { Component } from 'react';
 import {  Row , Section } from 'react-materialize'
 import api from '../riotAPI'
 import SummonerLeague from './SummonerLeague'
+import SummonerMatchItem from './SummonerMatchItem'
 
 class SummonerMatch extends Component {
 
   state = {
-    id: this.props.id,
-    accountId : this.props.accountId,
-    sumInfo: null,
-    sumMatchsList: null,
-    startIndex : 0,
-    endIndex : 5
+
   }
 
-  getSummonerLeague = async (id) => {
-    const response = await api.getSummonerLeague('euw1', id)
-    const sumInfo = await response.json()
-    this.setState({ id: id, sumInfo  })
-  }
-
-  getSummonerMatchsList = async(accountId) => {
-    const response = await api.getSummonerMatchslist('euw1' , accountId , this.state.startIndex, this.state.endIndex)
-    const sumMatchsList = await response.json()
-    this.setState({ sumMatchsList  })
-    console.log(sumMatchsList);
-  }
 
   componentWillReceiveProps = async (nextProps) => {
     if(this.state.id !== nextProps.id){
@@ -33,19 +17,22 @@ class SummonerMatch extends Component {
     }
   }
  
-
- componentDidMount = async () => {
-
-  }
-
+//startIndex
+//totalGames
 
   render(){
-   
+    const {  endIndex   } = this.props.sumMatchList;
+
     return(
       <React.Fragment>
         <Section>
            <Row >
-             
+              <span>{endIndex} derniers matchs </span>
+
+
+              {this.props.sumMatchList.matches.map((matches) =>
+                  <SummonerMatchItem key = {matches.gameId} gameId = {matches.gameId} sumMatchItem = {matches} />
+                )}
           </Row>
       </Section>
       </React.Fragment>

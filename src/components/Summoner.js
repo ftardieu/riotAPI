@@ -7,7 +7,10 @@ import SummonerMatch from './SummonerMatch'
 export const BlankComponent = () => <div>None</div>
 
 class Summoner extends Component {
-
+  constructor(props){
+    super(props)
+     this.getSummonerInfo( props.id ,  props.accountId)
+  }
   state = {
     id: this.props.id,
     accountId : this.props.accountId,
@@ -17,37 +20,32 @@ class Summoner extends Component {
     endIndex : 5
   }
 
-  getSummonerLeague = async (id) => {
+
+   getSummonerInfo = async(id,accountId) => {
     const response = await api.getSummonerLeague('euw1', id)
     const sumLeagueInfo = await response.json()
-    this.setState({ id: id, sumLeagueInfo  })
-  }
 
-  getSummonerMatches = async(accountId) => {
-    const response = await api.getSummonerMatches('euw1' , accountId , this.state.startIndex, this.state.endIndex)
-    const sumMatchList = await response.json()
-    this.setState({ sumMatchList  })
-    console.log(sumMatchList);
-  }
+    const response2 = await api.getSummonerMatches('euw1' , accountId , this.state.startIndex, this.state.endIndex)
+    const sumMatchList = await response2.json()
+
+
+     this.setState({ id , sumLeagueInfo , sumMatchList  })
+  }    
+
 
   componentWillReceiveProps = async (nextProps) => {
     if(this.state.id !== nextProps.id){
-      this.getSummonerLeague(nextProps.id)
-      this.getSummonerMatches(nextProps.accountId)
+      this.getSummonerInfo(nextProps.id, nextProps.accountId)
     }
   }
  
 
- componentDidMount = async () => {
-     this.getSummonerLeague(this.props.id)
-     this.getSummonerMatches(this.props.accountId)
-  }
 
 
   render(){
     const { sumLeagueInfo ,id  , sumMatchList } = this.state
     const { name, profileIconId, summonerLevel  } = this.props.sumData;
-    const profileIcon  = api.getSUmmonerProfileIcon(profileIconId)
+    const profileIcon  = api.getSummonerProfileIcon(profileIconId)
     return(
       <React.Fragment>
        <div className="summoner-info">
@@ -66,7 +64,7 @@ class Summoner extends Component {
        </div>
 
         { sumLeagueInfo && sumLeagueInfo.length > 0  ? <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/> : <BlankComponent />}
-        { sumMatchList && sumMatchList.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
+        { sumMatchList && sumMatchList.matches.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
       </React.Fragment>
     )
   }

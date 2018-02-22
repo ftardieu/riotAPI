@@ -14,9 +14,6 @@ class SummonerLeagueSoloQueue extends Component {
   }
  
 
- componentDidMount = async () => {
-     
-  }
 
 
   render(){
