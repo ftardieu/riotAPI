@@ -3,8 +3,32 @@ var config = require('./config')
 class riotAPI {
 	constructor(){
 		this.version = null
+		this.champions = null
 		this.getVersion()
-		this.locale = "fr_FR"
+		this.getChampions()
+		this.locale = "en_GB"
+		this.servers = [
+			{'euw1' : 'EUW'},
+			{'ru' : 'RU'},
+			{'kr' : 'KR'},
+			{'br1' : 'BR'},
+			{'oc1' : 'OC'},
+			{'jp1' : 'JP'},
+			{'na1' : 'NA'},
+			{'eun1' : 'EUN'},
+			{'la2' : 'LAS'},
+			{'la1' : 'LAN'}
+		]
+	}
+
+	getServers(){
+		return this.servers
+	}
+
+	getChampions = async () =>{
+		 fetch(`https://euw1.api.riotgames.com/lol/static-data/v3/champions?champData=image&tags=image&api_key=${config.key}&dataById=true`)
+		 .then(res => res.ok ? res.json() : null)
+		.then(champions => this.champions = champions)
 	}
 
 	getVersion = async () => {
@@ -36,12 +60,12 @@ class riotAPI {
 	}
 
 
-	getChampionInfo(championId , champData , tags ){
-		return fetch(`https://{server}.api.riotgames.com/lol/static-data/v3/champions/${championId}?champData=${champData}&version=${this.version}&tags=${tags}`)
+	getChampionById(championId){
+		return this.champions ? this.champions.data[championId] : null;
 	}
 
 	getChampionImg(championName){
-		return `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${championName}.png`
+		return `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/champion/${championName}`
 	}
 
 

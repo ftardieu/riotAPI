@@ -20,9 +20,7 @@ class SummonerLeague extends Component {
   }
  
 
- componentDidMount = async () => {
-     
-  }
+
 
 
   render(){
