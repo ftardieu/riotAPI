@@ -22,6 +22,7 @@ class riotAPI {
 			{'la2' : 'LAS'},
 			{'la1' : 'LAN'}
 		]
+		console.log()
 	}
 
 	getServers(){
@@ -30,7 +31,7 @@ class riotAPI {
 
 	setChampions = async () =>{
 		this.champions = champions
-		//  fetch(`https://euw1.api.riotgames.com/lol/static-data/v3/champions?champData=image&tags=image&api_key=${config.key}&dataById=true`)
+		//  fetch(`https://{$server.api.riotgames.com/lol/static-data/v3/champions?champData=image&tags=image&api_key=${config.key}&dataById=true`)
 		//  .then(res => res.ok ? res.json() : null)
 		// .then(champions => this.champions = champions)
 	}

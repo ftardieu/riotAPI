@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import {  Row , Section } from 'react-materialize'
+import { Section } from 'react-materialize'
 import SummonerLeagueSoloQueue from './SummonerLeagueSoloQueue'
 import SummonerLeagueTeamQueue from './SummonerLeagueTeamQueue'
-class SummonerLeague extends Component {
 
+import unranked from '../images/base-icons/provisional.png';
+
+export const BlankComponent = (props) => <div><img className={props.size + " rank-image"} src={unranked} alt=""/></div>
+
+class SummonerLeague extends Component {
   state = {
   
   }
 
  findArrayElementBySearch = (array, field , search) => {
-  return array.find((element) => {
+  return array ? array.find((element) => {
     return element[field] === search;
 
-  })
+  }) : null;
 }
 
   componentWillReceiveProps = async (nextProps) => {
@@ -32,13 +36,11 @@ class SummonerLeague extends Component {
     return(
       <React.Fragment>  
         <Section>
-         <Row >
-
-            <SummonerLeagueSoloQueue rankedSolo={rankedSolo} />       
-            <SummonerLeagueTeamQueue rankedFlex={rankedFlex5} />        
-            <SummonerLeagueTeamQueue rankedFlex={rankedFlex3} />   
-
-         </Row>
+         <div className="summoner-rank">
+             { rankedSolo ? <SummonerLeagueSoloQueue rankedSolo={rankedSolo} /> : <BlankComponent size="large"/>}
+             { rankedFlex5 ? <SummonerLeagueTeamQueue rankedFlex={rankedFlex5} /> : <BlankComponent size="large"/>}
+             { rankedFlex3 ? <SummonerLeagueTeamQueue rankedFlex={rankedFlex3} /> : <BlankComponent size="large"/>}
+         </div>
       </Section>
       </React.Fragment>
     )

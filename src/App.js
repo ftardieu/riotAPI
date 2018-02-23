@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import {  Icon , Input, Button, Section } from 'react-materialize'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {  Icon , Input, Button } from 'react-materialize'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Summoner from './components/Summoner'
 import SummonerError from './components/Error'
 import api from './riotAPI'
