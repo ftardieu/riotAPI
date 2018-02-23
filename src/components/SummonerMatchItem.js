@@ -7,6 +7,7 @@ class SummonerMatchItem extends Component {
   constructor(props){
     super(props)
      this.getSummonerInfoMatch( props.gameId)
+
   }
   state = {
     gameId : null,
@@ -24,31 +25,31 @@ class SummonerMatchItem extends Component {
     const response = await api.getSummonerMatch('euw1', gameId)
     const sumMatchItemInfo = await response.json()
 
-    this.setState({ gameId,  sumMatchItemInfo   })
-
-    this.getTeam()
+    this.getTeam(gameId,  sumMatchItemInfo)
   }   
 
-  getTeam = async ( ) => {
-    const { sumMatchItemInfo } = this.state
+  getTeam = async ( gameId,  sumMatchItemInfo) => {
       let team1 = []
       let team2 = []
       let iconTeam1 = []
       let iconTeam2 = []
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
-
+      let isSummonerTarget = false
       let icon = await api.getChampionById(sumMatchItemInfo.participants[i].championId)
-       let iconName = icon.image.full 
-       iconName = api.getChampionImg(iconName)
+      let iconName = icon.image.full 
+      iconName = api.getChampionImg(iconName)
 
-
+      if (sumMatchItemInfo.participantIdentities[i].player.summonerId === this.props.id) {
+          isSummonerTarget = true;
+      }
       if (sumMatchItemInfo.participants[i].teamId === 100 ) {
-        team1[i] = [ [sumMatchItemInfo.participantIdentities[i].player.summonerName] , [ iconName ]]
+
+        team1[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget]
       }else{
-        team2[i] = [ [sumMatchItemInfo.participantIdentities[i].player.summonerName] , [ iconName ]]
+        team2[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget]
       }
     }
-        this.setState({ team1 , team2   })
+        this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo   })
   }
 
   componentWillReceiveProps = async (nextProps) => {
@@ -60,15 +61,15 @@ class SummonerMatchItem extends Component {
 
 
   render(){
-    const { sumMatchItemInfo ,team1 , team2 } = this.state
+    const { sumMatchItemInfo ,team1 , team2 , gameId } = this.state
 
-
+    console.log(sumMatchItemInfo);
     return(
       <React.Fragment>
         <Section>
-           <div >
-            { team1 ?  <SummonerMatchItemParticipant key = 'team1' team = { team1 }  /> : null } 
-            { team2 ?  <SummonerMatchItemParticipant key = 'team2' team = { team2 }  /> : null }
+           <div >    
+            { team1.length > 0  ?  <SummonerMatchItemParticipant key = {gameId + 'team1'} id ={this.props.id} gameId = {gameId} team = { team1 }  /> : null } 
+            { team2.length > 0  ?  <SummonerMatchItemParticipant key = {gameId + 'team2'} id ={this.props.id} gameId = {gameId}  team = { team2 }  /> : null }
           </div>
       </Section>
       </React.Fragment>

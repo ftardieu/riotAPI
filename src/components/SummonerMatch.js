@@ -5,7 +5,9 @@ import SummonerLeague from './SummonerLeague'
 import SummonerMatchItem from './SummonerMatchItem'
 
 class SummonerMatch extends Component {
-
+  constructor(props){
+    super(props)
+  }
   state = {
 
   }
@@ -16,9 +18,7 @@ class SummonerMatch extends Component {
 
     }
   }
- 
-//startIndex
-//totalGames
+
 
   render(){
     const {  endIndex   } = this.props.sumMatchList;
@@ -31,7 +31,7 @@ class SummonerMatch extends Component {
 
 
               {this.props.sumMatchList.matches.map((matches) =>
-                  <SummonerMatchItem key = {matches.gameId} gameId = {matches.gameId} sumMatchItem = {matches} />
+                  <SummonerMatchItem key = {matches.gameId} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
                 )}
           </Row>
       </Section>
