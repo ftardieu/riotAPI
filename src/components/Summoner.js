@@ -17,7 +17,7 @@ class Summoner extends Component {
     sumLeagueInfo: null,
     sumMatchList: null,
     startIndex : 0,
-    endIndex : 5
+    endIndex : 1
   }
 
 

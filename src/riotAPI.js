@@ -1,11 +1,14 @@
 
+import champions from './champions.json'
+
 var config = require('./config')
+
 class riotAPI {
 	constructor(){
 		this.version = null
 		this.champions = null
 		this.getVersion()
-		this.getChampions()
+		this.setChampions()
 		this.locale = "en_GB"
 		this.servers = [
 			{'euw1' : 'EUW'},
@@ -25,17 +28,17 @@ class riotAPI {
 		return this.servers
 	}
 
-	getChampions = async () =>{
-		 fetch(`https://euw1.api.riotgames.com/lol/static-data/v3/champions?champData=image&tags=image&api_key=${config.key}&dataById=true`)
-		 .then(res => res.ok ? res.json() : null)
-		.then(champions => this.champions = champions)
+	setChampions = async () =>{
+		this.champions = champions
+		//  fetch(`https://euw1.api.riotgames.com/lol/static-data/v3/champions?champData=image&tags=image&api_key=${config.key}&dataById=true`)
+		//  .then(res => res.ok ? res.json() : null)
+		// .then(champions => this.champions = champions)
 	}
 
 	getVersion = async () => {
 		fetch('https://ddragon.leagueoflegends.com/api/versions.json')
 		.then(res => res.json())
 		.then(version => this.version = version[0])
-
 	}
 
 	 getSummonerByName = ( server, name ) => {
