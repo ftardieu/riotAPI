@@ -22,7 +22,7 @@ after_success:
   - git fetch origin dev:dev master:master --tags
   - standard-version
   - git checkout dev
-  - git cherry-pick master
+  - git merge --ff
   - git push origin --tags
 
 deploy:
