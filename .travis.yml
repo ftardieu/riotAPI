@@ -12,6 +12,7 @@ branches:
 before_script:
   - git config --global user.email "tardieu.f@hotmail.fr"
   - git config --global user.name "ftardieu"
+  - git remote set-url origin https://${github_token}@github.com/ftardieu/riotAPI.git
 
 script:
   - npm test
@@ -21,7 +22,7 @@ after_success:
   - git fetch origin dev:dev master:master --tags
   - standard-version
   - git checkout dev
-  - git cherry-pick master
+  - git merge --ff
   - git push origin --tags
 
 deploy:
