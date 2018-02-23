@@ -5,9 +5,7 @@ import {  Row , Section } from 'react-materialize'
 import SummonerMatchItem from './SummonerMatchItem'
 
 class SummonerMatch extends Component {
-  constructor(props){
-    super(props)
-  }
+
   state = {
 
   }

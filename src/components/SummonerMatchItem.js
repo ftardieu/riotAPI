@@ -60,7 +60,7 @@ class SummonerMatchItem extends Component {
 
   render(){
 
-    const { team1 , team2 } = this.state
+    const { team1 , team2 , gameId } = this.state
     return(
       <React.Fragment>
         <Section>

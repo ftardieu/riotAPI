@@ -5,13 +5,7 @@ import React, { Component } from 'react';
 // import SummonerLeague from './SummonerLeague'
 
 class SummonerMatchItemParticipant extends Component {
-<<<<<<< HEAD
-  constructor(props){
-    super(props)
-  }
-=======
 
->>>>>>> 395d64b8f1d5bff6688a8d470daf0e1fb3b4cfa9
   state = {
     sumMatchItemInfo:null
   }
@@ -30,9 +24,8 @@ class SummonerMatchItemParticipant extends Component {
 
   render(){
 
-    const { team } = this.props
+    const { team , gameId } = this.props
     const style = {display: 'inline-block'}
-    console.log(team);
     return(
       <React.Fragment>
       		
