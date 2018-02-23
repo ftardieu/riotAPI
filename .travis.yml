@@ -12,6 +12,7 @@ branches:
 before_script:
   - git config --global user.email "tardieu.f@hotmail.fr"
   - git config --global user.name "ftardieu"
+  - git remote set-url origin `https://${github_token}@github.com/ftardieu/riotAPI.git`
 
 script:
   - npm test
