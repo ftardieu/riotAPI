@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  Row , Section } from 'react-materialize'
-import api from '../riotAPI'
-import SummonerLeague from './SummonerLeague'
+// import api from '../riotAPI'
+// import SummonerLeague from './SummonerLeague'
 import SummonerMatchItem from './SummonerMatchItem'
 
 class SummonerMatch extends Component {

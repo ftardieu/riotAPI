@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {  Row , Section } from 'react-materialize'
+// import {  Row , Section } from 'react-materialize'
+// import api from '../riotAPI'
 
 class SummonerLeagueSoloQueue extends Component {
 
@@ -17,7 +18,7 @@ class SummonerLeagueSoloQueue extends Component {
 
 
   render(){
-     
+      const { rankedSolo }= this.props
 
 // freshBlood
 // hotStreak
@@ -36,12 +37,10 @@ class SummonerLeagueSoloQueue extends Component {
 // wins
 
     return(
-      <React.Fragment>  
-        <Section>
-         <Row >
-         <h4>SoloQ</h4>
-         </Row>
-      </Section>
+      <React.Fragment>
+          <div className="">
+              <span>{ rankedSolo.tier } { rankedSolo.rank }</span>
+          </div>
       </React.Fragment>
     )
   }

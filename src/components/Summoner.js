@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {  Icon , Input, Button, Section } from 'react-materialize'
 import api from '../riotAPI'
 import SummonerLeague from './SummonerLeague'
 import SummonerMatch from './SummonerMatch'
@@ -49,22 +48,23 @@ class Summoner extends Component {
     return(
       <React.Fragment>
        <div className="summoner-info">
-           <div className="summoner-face">
-               <img className="summoner-icon" alt='profileIcon' src={profileIcon}></img>
-               <span className="summoner-level">{summonerLevel}</span>
+           <div className="">
+               <div className="summoner-face">
+                   <img className="summoner-icon" alt='profileIcon' src={profileIcon}></img>
+                   <span className="summoner-level">{summonerLevel}</span>
+               </div>
+               <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
            </div>
            <div className="summoner-profile">
                <div>
-                   <span className="summoner-name">{name}</span>
                </div>
                <div>
-                   {/*<Button onClick={this.handleClick} floating><Icon>refresh</Icon></Button>*/}
+                   <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/>
                </div>
            </div>
        </div>
 
-        { sumLeagueInfo && sumLeagueInfo.length > 0  ? <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/> : <BlankComponent />}
-        { sumMatchList && sumMatchList.matches.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
+        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
       </React.Fragment>
     )
   }

@@ -1,14 +1,11 @@
 
 import React, { Component } from 'react';
-import {  Row , Section ,Col} from 'react-materialize'
-import api from '../riotAPI'
-import SummonerLeague from './SummonerLeague'
+// import {  Row , Section ,Col} from 'react-materialize'
+// import api from '../riotAPI'
+// import SummonerLeague from './SummonerLeague'
 
 class SummonerMatchItemParticipant extends Component {
-  constructor(props){
-    super(props)
-     
-  }
+
   state = {
     sumMatchItemInfo:null
   }
@@ -26,7 +23,7 @@ class SummonerMatchItemParticipant extends Component {
 
 
   render(){
-    const { team , teamId } = this.props
+    const { team } = this.props
     const style = {display: 'inline-block'}
     return(
       <React.Fragment>

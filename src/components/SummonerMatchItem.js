@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Row , Section } from 'react-materialize'
+import { Section } from 'react-materialize'
 import api from '../riotAPI'
 import SummonerMatchItemParticipant from './SummonerMatchItemParticipant'
 
@@ -33,8 +33,6 @@ class SummonerMatchItem extends Component {
     const { sumMatchItemInfo } = this.state
       let team1 = []
       let team2 = []
-      let iconTeam1 = []
-      let iconTeam2 = []
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
 
       let icon = await api.getChampionById(sumMatchItemInfo.participants[i].championId)
@@ -60,7 +58,7 @@ class SummonerMatchItem extends Component {
 
 
   render(){
-    const { sumMatchItemInfo ,team1 , team2 } = this.state
+    const { team1 , team2 } = this.state
 
 
     return(

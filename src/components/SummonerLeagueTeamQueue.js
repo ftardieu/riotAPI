@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Row , Section } from 'react-materialize'
+// import {  Row , Section } from 'react-materialize'
 
 class SummonerLeagueTeamQueue extends Component {
 
@@ -37,12 +37,10 @@ class SummonerLeagueTeamQueue extends Component {
 // wins
 
     return(
-      <React.Fragment>  
-        <Section>
-         <Row >
-         	<h4>Flex</h4>
-         </Row>
-      </Section>
+      <React.Fragment>
+          <div className="">
+              <span></span>
+          </div>
       </React.Fragment>
     )
   }
