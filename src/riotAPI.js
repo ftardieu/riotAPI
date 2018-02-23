@@ -1,5 +1,6 @@
 
 import champions from './champions.json'
+import fetch from 'node-fetch'
 
 var config = require('./config')
 
