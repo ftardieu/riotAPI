@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import {  Icon , Input, Button } from 'react-materialize'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Navbar,  Nav,  NavItem,  NavDropdown,  MenuItemFormControl ,MenuItem, FormGroup,  FormControl } from 'react-bootstrap';
 import Summoner from './components/Summoner'
 import SummonerError from './components/Error'
 import api from './riotAPI'
@@ -13,7 +13,7 @@ class App extends Component {
       sumData: null,
       error:false,
       valid: false,
-      summonerName: ""
+      summonerName: "" 
   }
 
     handleEnterKey = (e) => {
@@ -51,26 +51,53 @@ class App extends Component {
       return (
           <Router>
               <div>
-                  <nav>
-                      <div className="nav-wrapper">
-                          <Link to={'/'} className="brand-logo pad-left"> RiotAPI </Link>
-                          <ul id="nav-mobile" className="right hide-on-med-and-down">
-                              { valid ? <li>
-                                  <Input onKeyPress={this.handleEnterKey} onChange={(e) => this.setState({ name: e.target.value })} value = { name } required label="Your summoner name.." >
-                                      <Button onClick={this.handleClick} floating><Icon>search</Icon></Button>
-                                  </Input>
-                              </li> : null }
-                              <li><Link to={'/'} className="nav-link"><Icon>info_outline</Icon></Link></li>
-                              <li><Link to={'/'} className="nav-link"><Icon>lock_outline</Icon></Link></li>
-                          </ul>
-                      </div>
-                  </nav>
 
-                  <div className="container section">
+                  <Navbar collapseOnSelect>
+                    <Navbar.Header className = 'col-xs-3'>
+                      <Navbar.Brand>
+                        <a href="/">RiotAPI</a>
+                      </Navbar.Brand>
+                    </Navbar.Header>
+                      <Nav pullRight className='col-xs-9 '>
+                      { valid ? 
+                        <NavItem className='input-group col-xs-6 col-xs-offset-4' eventKey={1} href="#">
+                           <FormControl
+                            required
+                            autoFocus="true"
+                            type="text"
+                            value = { name }
+                            onKeyPress={this.handleEnterKey}
+                            palceholder="Your summoner name.."
+                            onChange={(e) => this.setState({ name: e.target.value })}
+                          />
+                          <div className="input-group-btn btn-search" >
+                             <button onClick={this.handleClick} className ="btn btn-default" ><i className="glyphicon glyphicon-search"></i></button>
+                          </div>
+
+                        </NavItem>
+                         : null }
+                          
+                      </Nav>
+                  </Navbar>
+
+                  <div className="container">
                       { !valid ?
-                          <Input onKeyPress={this.handleEnterKey} autoFocus="true" onChange={(e) => this.setState({ name: e.target.value })} value = { name } required label="Your summoner name.." >
-                              <Button onClick={this.handleClick} floating><Icon>search</Icon></Button>
-                          </Input> : null }
+                         
+                         <div className="input-group col-lg-4 col-lg-offset-4 add-on">
+                          <FormControl
+                            required
+                            autoFocus="true"
+                            type="text"
+                            value = { name }
+                            onKeyPress={this.handleEnterKey}
+                            palceholder="Your summoner name.."
+                            onChange={(e) => this.setState({ name: e.target.value })}
+                          />
+                           <div className="input-group-btn">
+                             <button onClick={this.handleClick} className ="btn btn-default" ><i className="glyphicon glyphicon-search"></i></button>
+                          </div>
+                         </div>
+                          : null }
                       {sumData ? <Summoner sumData={sumData} id={sumData.id} accountId = {sumData.accountId} /> : null}
                       {error ? <SummonerError /> : null}
                   </div>
