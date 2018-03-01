@@ -13,7 +13,7 @@ after_success:
   - git fetch origin dev:dev master:master --tags
   - standard-version
   - git checkout dev
-  - git checkout --ff
+  - git checkout -f
   - git push origin --tags
 
 deploy:
