@@ -9,11 +9,17 @@ branches:
   only:
     - master
 
+before_script:
+  - git config --global user.email "tardieu.f@hotmail.fr"
+  - git config --global user.name "Travis-CI"
+  - git remote set-url origin https://${github_token}@github.com/ftardieu/riotAPI.git
+
+
 after_success:
   - git fetch origin dev:dev master:master --tags
   - standard-version
   - git checkout dev
-  - git checkout -f
+  - git merge --ff
   - git push origin --tags
 
 deploy:
