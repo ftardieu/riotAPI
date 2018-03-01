@@ -9,6 +9,9 @@ branches:
   only:
     - master
 
+env:
+  github_token: $github_token
+
 before_script:
   - git config --global user.email "tardieu.f@hotmail.fr"
   - git config --global user.name "Travis-CI"
@@ -21,11 +24,3 @@ after_success:
   - git checkout dev
   - git merge --ff
   - git push origin --tags
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $github_token
-  local_dir: build
-  on:
-    branch: master

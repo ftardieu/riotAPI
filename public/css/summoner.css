@@ -1,0 +1,65 @@
+.summoner-info {
+    display: inline-block;
+}
+
+.summoner-face {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+}
+
+.summoner-profile {
+    display: inline-block;
+    position: relative;
+    height: 100px;
+    vertical-align: top;
+    line-height: 1.1;
+}
+
+.summoner-icon {
+    height: 125px;
+    display: block;
+}
+
+.summoner-name {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.summoner-level {
+    color: #d3a625;
+    font-weight: bold;
+    background-color: #740001;
+    border: 1px solid #d3a625;
+    position: absolute;
+    top: 81%;
+    font-size: 14.5px !important;
+    right: 0;
+    padding: 0 5px;
+}
+
+/* SUMMONER RANKS */
+
+.summoner-rank {
+    height: 75px;
+}
+
+.summoner-rank .summoner-solo-rank {
+    height: 100%;
+    display: inline-block;
+}
+
+.summoner-rank .summoner-team-rank {
+    height: 50%;
+    display: inline-block;
+}
+
+.rank-image.large {
+    height: 100px;
+}
+
+.rank-image.small {
+    height: 50px;
+}
+/* END SUMMONER RANKS */
