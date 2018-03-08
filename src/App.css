@@ -55,10 +55,32 @@
   display: inline-block;
 }
 
-#gameInfo , #gameParticipant{
+#gameInfo , #gameParticipant , #gameSettingInfo , #KDA{
   display: table-cell;
   vertical-align: middle;
+
 }
 #content{
   display: table
+}
+
+.gameWin{
+  background-color:#a3cfec;
+
+}
+
+.gameLose{
+  background-color:#e2b6b3;
+}
+
+#summonerIcon{
+  border-radius: 50%;
+}
+
+#spell , #rune{
+  display: block;
+}
+#summonerSpell , #summonerChamp, #summonerRune{
+  display: inline-block;
+  vertical-align: middle;
 }
