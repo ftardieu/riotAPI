@@ -26,22 +26,27 @@ class SummonerMatchItemParticipant extends Component {
 
     const { team , gameId } = this.props
     const style = {display: 'inline-block'}
+
     return(
       <React.Fragment>
       		
-			<div style={style} >
+			<div style = {style} >
+        <ul id = 'ulItemParticipant'>
 	  			{team.map((participant,i) =>
 	  				<React.Fragment key = {'react ' + gameId + i } >
+            <li>
 		  				<img height = '25px' key= { gameId + participant[1] + i} alt ='championIcon' src = {participant[1]}></img>
 		  				<span 
                 key= { gameId + participant[0] + i}
                 className  = { participant[2] ? 'target' : null}
                 > 
-                
+               
                 {participant[0]}
               </span>
+             </li>
 	  				</React.Fragment>
-	  			)}
+          )}
+          </ul>
 			</div>
           
       			

@@ -1,6 +1,5 @@
 
 import champions from './champions.json'
-import fetch from 'node-fetch'
 
 var config = require('./config')
 
@@ -38,9 +37,9 @@ class riotAPI {
 	}
 
 	getVersion = async () => {
-		fetch('https://ddragon.leagueoflegends.com/api/versions.json')
-		.then(res => res.json())
-		.then(version => this.version = version[0])
+		const res = await fetch('https://ddragon.leagueoflegends.com/api/versions.json')
+		const [ lastVersion ] = await res.json()
+		this.version = lastVersion
 	}
 
 	 getSummonerByName = ( server, name ) => {

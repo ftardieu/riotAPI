@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {  Row , Section } from 'react-materialize'
-// import api from '../riotAPI'
-// import SummonerLeague from './SummonerLeague'
 import SummonerMatchItem from './SummonerMatchItem'
 
 class SummonerMatch extends Component {
@@ -23,16 +21,15 @@ class SummonerMatch extends Component {
 
     return(
       <React.Fragment>
-        <Section>
-           <Row >
-              <span>{endIndex} derniers matchs </span>
 
 
+
+              <div id = "gameitemList">
               {this.props.sumMatchList.matches.map((matches) =>
                   <SummonerMatchItem key = {matches.gameId} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
                 )}
-          </Row>
-      </Section>
+              </div>
+
       </React.Fragment>
     )
   }

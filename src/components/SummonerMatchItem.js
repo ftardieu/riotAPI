@@ -16,8 +16,8 @@ class SummonerMatchItem extends Component {
     team2 : [],
     gameMode : null , 
     date : null, 
-    isWin : null, 
     gameTime : null , 
+    isSummonerWin : null , 
 
   }
 
@@ -33,21 +33,25 @@ class SummonerMatchItem extends Component {
       let team2 = []
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
+      let isWin = sumMatchItemInfo.participants[i].stats.win
       let icon = await api.getChampionById(sumMatchItemInfo.participants[i].championId)
       let iconName = icon.image.full 
       iconName = api.getChampionImg(iconName)
 
       if (sumMatchItemInfo.participantIdentities[i].player.summonerId === this.props.id) {
           isSummonerTarget = true;
+         var isSummonerWin = isWin
+
       }
+
       if (sumMatchItemInfo.participants[i].teamId === 100 ) {
 
-        team1[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget]
+        team1[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget, isWin]
       }else{
-        team2[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget]
+        team2[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget , isWin]
       }
     }
-        this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo   })
+        this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo  , isSummonerWin })
   }
 
   componentWillReceiveProps = async (nextProps) => {
@@ -57,19 +61,35 @@ class SummonerMatchItem extends Component {
   }
  
 
-
   render(){
 
-    const { team1 , team2 , gameId } = this.state
+    const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin} = this.state
+    const { sumMatchItem } = this.props
+
+    if (sumMatchItemInfo) {
+      const { gameDuration } = sumMatchItemInfo
+      var quotient = Math.floor(gameDuration/60);
+      var remainder = gameDuration % 60;
+    }
+
     return(
-      <React.Fragment>
-        <Section>
-           <div >    
-            { team1.length > 0  ?  <SummonerMatchItemParticipant key = {gameId + 'team1'} id ={this.props.id} gameId = {gameId} team = { team1 }  /> : null } 
-            { team2.length > 0  ?  <SummonerMatchItemParticipant key = {gameId + 'team2'} id ={this.props.id} gameId = {gameId}  team = { team2 }  /> : null }
-          </div>
-      </Section>
-      </React.Fragment>
+      <div id = 'gameItem' data-game-id = {gameId} >
+
+     
+          { sumMatchItemInfo ? 
+            <div id= "content">
+            <div id = "gameInfo" >
+             <div >{sumMatchItemInfo.gameMode}</div>
+             <div> { quotient }m {remainder}s </div>
+            </div>
+ 
+          <div id = 'gameParticipant'>
+           <SummonerMatchItemParticipant key = {gameId + 'team1'} id ={this.props.id} gameId = {gameId} team = { team1 }  />   
+           <SummonerMatchItemParticipant key = {gameId + 'team2'} id ={this.props.id} gameId = {gameId}  team = { team2 }  /> 
+         </div>  
+         </div>
+       : null } 
+      </div>
     )
   }
 }

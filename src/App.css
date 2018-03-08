@@ -42,3 +42,23 @@
 .btn-search{
   display:block;
 }
+
+#ulItemParticipant{
+  list-style-type:none;
+}
+
+.target{
+  font-weight: bold;
+}
+
+#gameInfo{
+  display: inline-block;
+}
+
+#gameInfo , #gameParticipant{
+  display: table-cell;
+  vertical-align: middle;
+}
+#content{
+  display: table
+}
