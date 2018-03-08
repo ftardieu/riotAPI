@@ -19,6 +19,10 @@ class SummonerLeagueSoloQueue extends Component {
 
   render(){
       const { rankedSolo }= this.props
+      const iconPath = "../images/base-icons/" + rankedSolo.tier.toLowerCase() + '.png';
+      const tierRank = ['master','challenger'].includes(rankedSolo.tier.toLowerCase()) ? '' : rankedSolo.rank;
+      const rankLabel = rankedSolo.tier.charAt(0).toUpperCase() + rankedSolo.tier.substr(1).toLowerCase() + ' ' + tierRank;
+      const winRatio = (rankedSolo.wins / (rankedSolo.wins + rankedSolo.losses) * 100).toFixed();
 
 // freshBlood
 // hotStreak
@@ -37,11 +41,16 @@ class SummonerLeagueSoloQueue extends Component {
 // wins
 
     return(
-      <React.Fragment>
-          <div className="">
-              <span>{ rankedSolo.tier } { rankedSolo.rank }</span>
+      <div className="summoner-rank col-xs-4">
+          <div className="rank-info col-xs-6">
+              <img src={iconPath} />
           </div>
-      </React.Fragment>
+          <div className="rank-info col-xs-6">
+              <span className="rank-label">{ rankLabel }</span>
+              <span className="bold">{ rankedSolo.leaguePoints }LP</span>
+              <span className="rank-stats"> { rankedSolo.wins }W { rankedSolo.losses}D ({winRatio}%)</span>
+          </div>
+      </div>
     )
   }
 }

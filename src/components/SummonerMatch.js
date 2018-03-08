@@ -24,7 +24,7 @@ class SummonerMatch extends Component {
 
 
 
-              <div id = "gameitemList">
+              <div id = "gameitemList" className="col-xs-12">
               {this.props.sumMatchList.matches.map((matches) =>
                   <SummonerMatchItem key = {matches.gameId} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
                 )}

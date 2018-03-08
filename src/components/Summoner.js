@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image , Badge } from 'react-bootstrap';
 import api from '../riotAPI'
 import SummonerLeague from './SummonerLeague'
 import SummonerMatch from './SummonerMatch'
@@ -47,20 +48,16 @@ class Summoner extends Component {
     const profileIcon  = api.getSummonerProfileIcon(profileIconId)
     return(
       <React.Fragment>
-       <div className="summoner-info">
-           <div className="">
-               <div className="summoner-face">
-                   <img className="summoner-icon" alt='profileIcon' src={profileIcon}></img>
-                   <span className="summoner-level">{summonerLevel}</span>
-               </div>
-               <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
+       <div className='summoner-info col-xs-12'>
+           <div className="summoner-face">
+               <Image className="summoner-icon" alt='profileIcon' src={profileIcon} thumbnail />
            </div>
-           <div className="summoner-profile">
+           <div className="summoner-profile col-xs-8">
                <div>
+                   <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
+                   <Badge className="summoner-level">{summonerLevel}</Badge>
                </div>
-               <div>
-                   <SummonerLeague sumLeagueInfo={sumLeagueInfo} id={id}/>
-               </div>
+               <SummonerLeague className="col-xs-12" sumLeagueInfo={sumLeagueInfo} id={id}/>
            </div>
        </div>
 
