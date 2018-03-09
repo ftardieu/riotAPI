@@ -31,7 +31,7 @@ class SummonerMatchItemParticipant extends Component {
       <React.Fragment>
       		
 			<div style = {style} >
-        <ul id = 'ulItemParticipant'>
+        <ul className = 'ulItemParticipant'>
 	  			{team.map((participant,i) =>
 	  				<React.Fragment key = {'react ' + gameId + i } >
             <li>

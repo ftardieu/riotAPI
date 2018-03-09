@@ -38,7 +38,13 @@ class Summoner extends Component {
     }
   }
  
+   handleClick = (e) => {
+     const { endIndex , id , accountId } = this.state
+      let indexEnd = endIndex + 1
+      this.setState({ endIndex : indexEnd })
+      this.getSummonerInfo(id , accountId)
 
+    }
 
 
   render(){
@@ -64,7 +70,8 @@ class Summoner extends Component {
            </div>
        </div>
 
-        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ? <SummonerMatch sumMatchList={sumMatchList} id={id} /> : <BlankComponent />}
+        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ? <div><SummonerMatch name = {this.state.name} sumMatchList={sumMatchList} id={id} /> <button onClick={this.handleClick} className ="btn btn-default" >Voir plus de match </button></div> : <BlankComponent />}
+
       </React.Fragment>
     )
   }
