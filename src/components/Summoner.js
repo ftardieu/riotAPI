@@ -10,6 +10,7 @@ class Summoner extends Component {
   constructor(props){
     super(props)
      this.getSummonerInfo( props.id ,  props.accountId)
+     this.getsummonerLeagueInfo( props.id )
   }
   state = {
     id: this.props.id,
@@ -17,23 +18,31 @@ class Summoner extends Component {
     sumLeagueInfo: null,
     sumMatchList: null,
     startIndex : 0,
-    endIndex : 1
+    endIndex : 1,
+    addCount : 1
   }
 
+
+
+  getsummonerLeagueInfo = async (id) => {
+
+    const response = await api.getSummonerLeague('euw1', id)
+    const sumLeagueInfo = await response.json()
+    this.setState({  sumLeagueInfo })
+
+  }
 
   getSummonerInfo = async(id,accountId, addCount = 0) => {
     const { endIndex , startIndex} = this.state
 
-    const response = await api.getSummonerLeague('euw1', id)
-    const sumLeagueInfo = await response.json()
-
-    const response2 = await api.getSummonerMatches('euw1' , accountId , this.state.startIndex, this.state.endIndex)
-    const sumMatchList = await response2.json()
-
     let indexE = endIndex + addCount
     let indexS = startIndex + addCount
 
-    this.setState({ id , sumLeagueInfo , sumMatchList, endIndex : indexE , startIndex  : indexS })
+
+    const response2 = await api.getSummonerMatches('euw1' , accountId , indexS, indexE)
+    const sumMatchList = await response2.json()
+
+    this.setState({ id  , sumMatchList, endIndex : indexE , startIndex  : indexS })
   }    
 
 
@@ -44,7 +53,7 @@ class Summoner extends Component {
   }
   
    handleClick = () => {
-      this.getSummonerInfo(this.state.id , this.state.accountId, 1)
+      this.getSummonerInfo(this.state.id , this.state.accountId, this.state.addCount)
   }
 
 

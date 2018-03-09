@@ -5,6 +5,11 @@ import SummonerError from './Error'
 import api from '../riotAPI'
 
 class Home extends Component {
+  constructor(props){
+    super(props)
+    this.makeRequest(props.match.params.playerName)
+
+   }
     state = {
         name: "",
         sumData: null,
@@ -16,7 +21,7 @@ class Home extends Component {
     componentWillReceiveProps = async (nextProps) => {
         console.log(nextProps.match.params)
         console.log(this.state.name)
-        if(this.state.name !== nextProps.match.params.playerName){
+        if(this.state.summonerName !== nextProps.match.params.playerName){
             this.makeRequest(nextProps.match.params.playerName)
         }
     }
@@ -24,14 +29,13 @@ class Home extends Component {
 
 
     handleEnterKey = (e) => {
-        if (e.key === 'Enter') {
-            this.makeRequest(this.state.name)
-        }
-    }
+      if (e.key === 'Enter') {
+        this.props.history.push('/player/'+ this.state.name)        }
+      }
 
     handleClick = () => {
         const { name } = this.state
-        this.makeRequest(name)
+        this.props.history.push('/player/'+ name)
     }
 
     makeRequest = async (name) =>{
