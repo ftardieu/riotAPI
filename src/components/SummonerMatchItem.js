@@ -47,14 +47,29 @@ class SummonerMatchItem extends Component {
   getTeam = async ( gameId,  sumMatchItemInfo) => {
       let team1 = []
       let team2 = []
-      var sumTeam1Kills = 0
-      var sumTeam1Deaths = 0
-      var sumTeam1Assists = 0
-      var sumTeam2Kills = 0
-      var sumTeam2Deaths = 0
-      var sumTeam2Assists = 0
+      let sumTeam1Kills = 0
+      let sumTeam1Deaths = 0
+      let sumTeam1Assists = 0
+      let sumTeam2Kills = 0
+      let sumTeam2Deaths = 0
+      let sumTeam2Assists = 0
       let summonerSpellName1
       let summonerSpellName2
+      let isSummonerWin
+      let summonerIcon
+      let perk
+      let perkSubStyle
+      let kills
+      let deaths
+      let assists
+      let champLevel
+      let  csNumber
+      let  csNumberNeutral
+      let  isTeam1
+      let  totalDamageDealtToChampions
+      let  visionWardsBoughtInGame
+      let wardsKilled
+      let wardsPlaced
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
       let isWin = sumMatchItemInfo.participants[i].stats.win
@@ -64,8 +79,8 @@ class SummonerMatchItem extends Component {
 
       if (sumMatchItemInfo.participantIdentities[i].player.summonerId === this.props.id) {
         isSummonerTarget = true;
-        var isSummonerWin = isWin
-        var summonerIcon = iconName
+        isSummonerWin = isWin
+        summonerIcon = iconName
 
         let spell1 = await api.getSpellById(sumMatchItemInfo.participants[i].spell1Id)
         let spellName1 = spell1.image.full 
@@ -75,34 +90,33 @@ class SummonerMatchItem extends Component {
         let spellName2 = spell2.image.full
         summonerSpellName2 = api.getSummonerSpellImg(spellName2)
 
-        var perk = sumMatchItemInfo.participants[i].stats.perk0
-        var perkSubStyle = sumMatchItemInfo.participants[i].stats.perkSubStyle
+        perk = sumMatchItemInfo.participants[i].stats.perk0
+        perkSubStyle = sumMatchItemInfo.participants[i].stats.perkSubStyle
 
-        var kills = sumMatchItemInfo.participants[i].stats.kills
-        var deaths = sumMatchItemInfo.participants[i].stats.deaths
-        var assists = sumMatchItemInfo.participants[i].stats.assists
+        kills = sumMatchItemInfo.participants[i].stats.kills
+        deaths = sumMatchItemInfo.participants[i].stats.deaths
+        assists = sumMatchItemInfo.participants[i].stats.assists
 
-        var champLevel = sumMatchItemInfo.participants[i].stats.champLevel
-
-        var items = [];
+        champLevel = sumMatchItemInfo.participants[i].stats.champLevel
+        items = []
 
         for (let j = 0; j < 7; j++) {
-            var item = '../images/opacity.png';
+            let item = '../images/opacity.png';
             if(sumMatchItemInfo.participants[i].stats['item'+j])
               item = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats['item'+j] + '.png');
             items.push(item);
         }
 
-        var csNumber =  sumMatchItemInfo.participants[i].stats.totalMinionsKilled  
-        var csNumberNeutral =  sumMatchItemInfo.participants[i].stats.neutralMinionsKilled  
-        var isTeam1 = sumMatchItemInfo.participants[i].teamId === 100 ? true : false 
-        var totalDamageDealtToChampions = sumMatchItemInfo.participants[i].stats.totalDamageDealtToChampions
+         csNumber =  sumMatchItemInfo.participants[i].stats.totalMinionsKilled  
+         csNumberNeutral =  sumMatchItemInfo.participants[i].stats.neutralMinionsKilled  
+         isTeam1 = sumMatchItemInfo.participants[i].teamId === 100 ? true : false 
+         totalDamageDealtToChampions = sumMatchItemInfo.participants[i].stats.totalDamageDealtToChampions
 
-        var visionWardsBoughtInGame = sumMatchItemInfo.participants[i].stats.visionWardsBoughtInGame
+         visionWardsBoughtInGame = sumMatchItemInfo.participants[i].stats.visionWardsBoughtInGame
 
-        var  wardsKilled = sumMatchItemInfo.participants[i].stats.wardsKilled
+          wardsKilled = sumMatchItemInfo.participants[i].stats.wardsKilled
 
-        var wardsPlaced = sumMatchItemInfo.participants[i].stats.wardsPlaced
+         wardsPlaced = sumMatchItemInfo.participants[i].stats.wardsPlaced
 
       }
 
@@ -132,7 +146,7 @@ class SummonerMatchItem extends Component {
     }
   }
   componentDidMount = async () => {
-         this.getSummonerInfoMatch( this.props.gameId)
+    this.getSummonerInfoMatch( this.props.gameId)
 
   }
  
