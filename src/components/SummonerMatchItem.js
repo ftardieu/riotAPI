@@ -70,6 +70,7 @@ class SummonerMatchItem extends Component {
       let  visionWardsBoughtInGame
       let wardsKilled
       let wardsPlaced
+      let items 
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
       let isWin = sumMatchItemInfo.participants[i].stats.win
