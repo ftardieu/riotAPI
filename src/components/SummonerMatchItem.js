@@ -11,12 +11,10 @@ class SummonerMatchItem extends Component {
   }
   state = {
     gameId : null,
+    isTeam1 : null,
     sumMatchItemInfo: null,
     team1 : [] , 
     team2 : [],
-    gameMode : null , 
-    date : null, 
-    gameTime : null , 
     isSummonerWin : null , 
     summonerIcon : null , 
     summonerSpellName1 : null,
@@ -25,7 +23,23 @@ class SummonerMatchItem extends Component {
     perkSubStyle : null , 
     kills:null,
     deaths:null,
-    assists :null
+    assists :null,
+    champLevel : null,
+    item0 :null , 
+    item1 :null , 
+    item2 :null , 
+    item3 :null , 
+    item4 :null , 
+    item5 :null , 
+    item6 :null , 
+    csNumber : null,
+    csNumberNeutral : null,
+    sumTeam1Kills:null,
+    sumTeam2Kills:null,
+    visionWardsBoughtInGame:null,
+    wardsKilled:null,
+    wardsPlaced:null
+
 
   }
 
@@ -39,6 +53,12 @@ class SummonerMatchItem extends Component {
   getTeam = async ( gameId,  sumMatchItemInfo) => {  
       let team1 = []
       let team2 = []
+      var sumTeam1Kills = 0
+      var sumTeam1Deaths = 0
+      var sumTeam1Assists = 0
+      var sumTeam2Kills = 0
+      var sumTeam2Deaths = 0
+      var sumTeam2Assists = 0
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
       let isWin = sumMatchItemInfo.participants[i].stats.win
@@ -66,20 +86,48 @@ class SummonerMatchItem extends Component {
         var deaths = sumMatchItemInfo.participants[i].stats.deaths
         var assists = sumMatchItemInfo.participants[i].stats.assists
 
+        var champLevel = sumMatchItemInfo.participants[i].stats.champLevel
+
+        var item0 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item0 + '.png')
+        var item1 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item1 + '.png')
+        var item2 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item2 + '.png')
+        var item3 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item3 + '.png')
+        var item4 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item4 + '.png')
+        var item5 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item5 + '.png')
+        var item6 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item6 + '.png') 
+        var csNumber =  sumMatchItemInfo.participants[i].stats.totalMinionsKilled  
+        var csNumberNeutral =  sumMatchItemInfo.participants[i].stats.neutralMinionsKilled  
+        var isTeam1 = sumMatchItemInfo.participants[i].teamId === 100 ? true : false 
+        var totalDamageDealtToChampions = sumMatchItemInfo.participants[i].stats.totalDamageDealtToChampions
+
+        var visionWardsBoughtInGame = sumMatchItemInfo.participants[i].stats.visionWardsBoughtInGame
+
+        var  wardsKilled = sumMatchItemInfo.participants[i].stats.wardsKilled
+
+        var wardsPlaced = sumMatchItemInfo.participants[i].stats.wardsPlaced
+
       }
 
       if (sumMatchItemInfo.participants[i].teamId === 100 ) {
 
-        team1[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget, isWin]
+        sumTeam1Kills += sumMatchItemInfo.participants[i].stats.kills
+        sumTeam1Deaths += sumMatchItemInfo.participants[i].stats.deaths
+        sumTeam1Assists += sumMatchItemInfo.participants[i].stats.assists
+        team1[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget, isWin , sumTeam1Kills , sumTeam1Deaths ,sumTeam1Assists]
       }else{
-        team2[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget , isWin]
+
+        sumTeam2Kills += sumMatchItemInfo.participants[i].stats.kills
+        sumTeam2Deaths += sumMatchItemInfo.participants[i].stats.deaths
+        sumTeam2Assists += sumMatchItemInfo.participants[i].stats.assists
+        team2[i] = [ sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget , isWin , sumTeam2Kills , sumTeam2Deaths ,sumTeam2Assists]
       }
     }
-        this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo  , isSummonerWin ,summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists })
+        this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo  , isSummonerWin ,summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists , champLevel ,
+         item0, item1, item2,item3,item4,item5,item6  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame})
   }
 
   componentWillReceiveProps = async (nextProps) => {
-    if(this.state.gameId !== nextProps.gameId){
+    if(this.state.gameId !== nextProps.gameId){ 
       this.getSummonerInfoMatch( nextProps.gameId)
     }
   }
@@ -87,7 +135,8 @@ class SummonerMatchItem extends Component {
 
   render(){
 
-    const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists} = this.state
+    const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
+     item0, item1 , item2 , item3,item4,item5,item6 , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame} = this.state
     const { sumMatchItem } = this.props
 
     if (sumMatchItemInfo) {
@@ -101,6 +150,12 @@ class SummonerMatchItem extends Component {
       var perkSubStyleImg = "../images/perkStyle/" + perkSubStyle + '.png'
 
       var kda = deaths > 0 ? ((kills+assists) / deaths ).toFixed(2) +":1" : "Perfect"
+      var totalCs = csNumber + csNumberNeutral
+      var totalCsPerMinute = (totalCs / quotient).toFixed(1)
+
+      var participationKills = isTeam1 ? Math.round( (kills + assists) / sumTeam1Kills *100 )  :  Math.round( (kills + assists) / sumTeam2Kills *100 )
+
+
 
       console.log(sumMatchItemInfo)
     }
@@ -110,45 +165,101 @@ class SummonerMatchItem extends Component {
 
      
           { sumMatchItemInfo ? 
-            <div id= "content">
-                <div id = "gameInfo" >
+            <div className= "content">
+                <div className = "gameInfo" >
                   <div> {gameMode}</div>
                   <div> { quotient }m {remainder}s </div>
                   <div>  {gameResult} </div>
                 </div>
 
-                <div id = "gameSettingInfo">
-                  <div id ='summonerChamp'>
-                    <img height = '50px' alt ='championIcon' id ="summonerIcon" src = {summonerIcon}></img>
+                <div className = "gameSettingInfo">
+                  <div className ='summonerChamp'>
+                    <img height = '50px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}></img>
                   </div>
-                  <div id ="summonerSpell">
-                    <div id ='spell'>
-                      <img height = '25px' alt ='summonerSpell1' id ="summonerSpell" src = {summonerSpellName1}></img>
+                  <div className ="summonerSpell">
+                    <div className ='spell'>
+                      <img height = '25px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}></img>
                     </div>
-                    <div id ='spell'>
-                      <img height = '25px' alt ='summonerSpell2' id ="summonerSpell" src = {summonerSpellName2}></img>
+                    <div className ='spell'>
+                      <img height = '25px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}></img>
                     </div>
                   </div>
-                  <div id='summonerRune'>
-                    <div id ='rune'>
-                      <img height = '25px' alt ='summonerSpell2' id ="summonerSpell" src = {perkImg} ></img>
+                  <div className='summonerRune'>
+                    <div className ='rune'>
+                      <img height = '25px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} ></img>
                     </div>
-                    <div id ='rune'>
-                      <img height = '25px' alt ='summonerSpell2' id ="summonerSpell" src = {perkSubStyleImg} ></img>
+                    <div className ='rune'>
+                      <img height = '25px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} ></img>
                     </div>
                   </div>
                 </div>
-                <div id = "KDA">
-                  <div id="stat">
+                <div className = "KDA">
+                  <div className="stat">
                     <span> { kills +"/" + deaths + "/" +  assists }</span>
                   </div>
-                  <div id ="statRatio">
+                  <div className ="statRatio">
                     <span> {kda.trim()} KDA </span>
                   </div>
 
                 </div>
-     
-              <div id = 'gameParticipant'>
+                <div className= "statsChamp" >
+                  
+                  <div className ='level'>
+                    <span>Level {champLevel}</span>
+
+                  </div>
+                  
+                  <div className ='cs'>
+                    <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
+
+                  </div>                  
+                  <div className ='participationKills'>
+                    <span> P/Kills {participationKills} %</span>
+                  </div>
+
+                </div>
+                <div className ='summonerItemsList'>
+                  <div className ='summonerItems'>
+                    <div >
+                    
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item0} ></img>
+                      </div>                  
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item1} ></img>
+                      </div>                  
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item2} ></img>
+                      </div>     
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item6} ></img>
+                      </div> 
+                    </div> 
+                    <div>
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item3} ></img>
+                      </div>                  
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item4} ></img>
+                      </div>                  
+                      <div className = "summonerItem" >
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {item5} ></img>
+                      </div>                  
+
+                    </div>
+                  </div>
+                </div>
+             <div className ="summonerWards" >
+                <div className='ward'>
+                  <div>
+                      <span>{visionWardsBoughtInGame}</span>
+                   </div>
+                  <div>
+                    <span>{wardsPlaced + "/" + wardsKilled}</span>
+                   </div>
+                </div>
+             </div>
+              <div className = 'gameParticipant'>
                 <SummonerMatchItemParticipant key = {gameId + 'team1'} id ={this.props.id} gameId = {gameId} team = { team1 }  />   
                 <SummonerMatchItemParticipant key = {gameId + 'team2'} id ={this.props.id} gameId = {gameId}  team = { team2 }  /> 
               </div>  
@@ -160,6 +271,3 @@ class SummonerMatchItem extends Component {
 }
 
 export default SummonerMatchItem;
-
-// stats / perkSubStyle
-// stats / perk0

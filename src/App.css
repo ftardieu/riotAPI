@@ -42,25 +42,21 @@
 .btn-search{
   display:block;
 }
-
-#ulItemParticipant{
+.ulItemParticipant{
   list-style-type:none;
 }
 
 .target{
   font-weight: bold;
 }
-
-#gameInfo{
+.gameInfo{
   display: inline-block;
 }
-
-#gameInfo , #gameParticipant , #gameSettingInfo , #KDA{
+.gameInfo , .gameParticipant , .gameSettingInfo , .KDA , .statsChamp , .summonerItemsList , .summonerWards{
   display: table-cell;
   vertical-align: middle;
 
-}
-#content{
+}.content{
   display: table
 }
 
@@ -72,15 +68,18 @@
 .gameLose{
   background-color:#e2b6b3;
 }
-
-#summonerIcon{
+.summonerIcon{
   border-radius: 50%;
 }
-
-#spell , #rune{
+.spell , .rune{
   display: block;
-}
-#summonerSpell , #summonerChamp, #summonerRune{
+}.summonerSpell , .summonerChamp, .summonerRune , .summonerItem  , .ward {
   display: inline-block;
   vertical-align: middle;
+}
+.summonerItems{
+  display: table;
+}
+.gameitemList{
+  text-align: center
 }

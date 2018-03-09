@@ -36,7 +36,8 @@ class riotAPI {
 			470 : "Ranked Flex 3v3",
 			450 : "ARAM",
 			325 : "Normal",
-			400 : "Normal"
+			400 : "Normal",
+			820 : "Co-op VS Bot"
 
 		}
 		return queue[queueId];
@@ -103,6 +104,9 @@ class riotAPI {
 		return `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/spell/${spellName}`
 	}
 
+	getSummonerItemImg(item){
+		return `http://ddragon.leagueoflegends.com/cdn/${this.version}/img/item/${item}`
+	}
 
 }	
 
