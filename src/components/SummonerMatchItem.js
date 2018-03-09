@@ -10,6 +10,7 @@ class SummonerMatchItem extends Component {
 
   }
   state = {
+    name : this.props.name,
     gameId : null,
     isTeam1 : null,
     sumMatchItemInfo: null,
@@ -25,13 +26,7 @@ class SummonerMatchItem extends Component {
     deaths:null,
     assists :null,
     champLevel : null,
-    item0 :null , 
-    item1 :null , 
-    item2 :null , 
-    item3 :null , 
-    item4 :null , 
-    item5 :null , 
-    item6 :null , 
+    items: [],
     csNumber : null,
     csNumberNeutral : null,
     sumTeam1Kills:null,
@@ -50,7 +45,7 @@ class SummonerMatchItem extends Component {
     this.getTeam(gameId,  sumMatchItemInfo)
   }   
 
-  getTeam = async ( gameId,  sumMatchItemInfo) => {  
+  getTeam = async ( gameId,  sumMatchItemInfo) => {
       let team1 = []
       let team2 = []
       var sumTeam1Kills = 0
@@ -76,7 +71,7 @@ class SummonerMatchItem extends Component {
         var summonerSpellName1 = api.getSummonerSpellImg(spellName1)
 
         let spell2 = await api.getSpellById(sumMatchItemInfo.participants[i].spell2Id)
-        let spellName2 = spell2.image.full 
+        let spellName2 = spell2.image.full
         var summonerSpellName2 = api.getSummonerSpellImg(spellName2)
 
         var perk = sumMatchItemInfo.participants[i].stats.perk0
@@ -88,13 +83,15 @@ class SummonerMatchItem extends Component {
 
         var champLevel = sumMatchItemInfo.participants[i].stats.champLevel
 
-        var item0 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item0 + '.png')
-        var item1 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item1 + '.png')
-        var item2 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item2 + '.png')
-        var item3 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item3 + '.png')
-        var item4 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item4 + '.png')
-        var item5 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item5 + '.png')
-        var item6 = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats.item6 + '.png') 
+        var items = [];
+
+        for (let j = 0; j < 7; j++) {
+            var item = '../images/opacity.png';
+            if(sumMatchItemInfo.participants[i].stats['item'+j])
+              item = api.getSummonerItemImg(sumMatchItemInfo.participants[i].stats['item'+j] + '.png');
+            items.push(item);
+        }
+
         var csNumber =  sumMatchItemInfo.participants[i].stats.totalMinionsKilled  
         var csNumberNeutral =  sumMatchItemInfo.participants[i].stats.neutralMinionsKilled  
         var isTeam1 = sumMatchItemInfo.participants[i].teamId === 100 ? true : false 
@@ -123,11 +120,11 @@ class SummonerMatchItem extends Component {
       }
     }
         this.setState({ team1 , team2  ,gameId,  sumMatchItemInfo  , isSummonerWin ,summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists , champLevel ,
-         item0, item1, item2,item3,item4,item5,item6  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame})
+         items  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame})
   }
 
   componentWillReceiveProps = async (nextProps) => {
-    if(this.state.gameId !== nextProps.gameId){ 
+    if(this.state.gameId !== nextProps.gameId && this.state.name !== nextProps.name){ 
       this.getSummonerInfoMatch( nextProps.gameId)
     }
   }
@@ -136,7 +133,7 @@ class SummonerMatchItem extends Component {
   render(){
 
     const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
-     item0, item1 , item2 , item3,item4,item5,item6 , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame} = this.state
+     items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame} = this.state
     const { sumMatchItem } = this.props
 
     if (sumMatchItemInfo) {
@@ -221,31 +218,29 @@ class SummonerMatchItem extends Component {
                 <div className ='summonerItemsList'>
                   <div className ='summonerItems'>
                     <div >
-                    
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item0} ></img>
+                           <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
                       </div>                  
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item1} ></img>
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
                       </div>                  
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item2} ></img>
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
                       </div>     
-                      <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item6} ></img>
+                      <div className = "summonerItem" >/
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
                       </div> 
                     </div> 
                     <div>
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item3} ></img>
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
                       </div>                  
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item4} ></img>
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
                       </div>                  
                       <div className = "summonerItem" >
-                           <img height = '25px' alt ='summonerItem' className ="item" src = {item5} ></img>
-                      </div>                  
-
+                           <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
+                      </div>
                     </div>
                   </div>
                 </div>

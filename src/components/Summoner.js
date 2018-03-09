@@ -21,15 +21,19 @@ class Summoner extends Component {
   }
 
 
-   getSummonerInfo = async(id,accountId) => {
+  getSummonerInfo = async(id,accountId, addCount = 0) => {
+    const { endIndex , startIndex} = this.state
+
     const response = await api.getSummonerLeague('euw1', id)
     const sumLeagueInfo = await response.json()
 
     const response2 = await api.getSummonerMatches('euw1' , accountId , this.state.startIndex, this.state.endIndex)
     const sumMatchList = await response2.json()
 
+    let indexE = endIndex + addCount
+    let indexS = startIndex + addCount
 
-     this.setState({ id , sumLeagueInfo , sumMatchList  })
+    this.setState({ id , sumLeagueInfo , sumMatchList, endIndex : indexE , startIndex  : indexS })
   }    
 
 
@@ -38,14 +42,10 @@ class Summoner extends Component {
       this.getSummonerInfo(nextProps.id, nextProps.accountId)
     }
   }
- 
-   handleClick = (e) => {
-     const { endIndex , id , accountId } = this.state
-      let indexEnd = endIndex + 1
-      this.setState({ endIndex : indexEnd })
-      this.getSummonerInfo(id , accountId)
-
-    }
+  
+   handleClick = () => {
+      this.getSummonerInfo(this.state.id , this.state.accountId, 1)
+  }
 
 
   render(){
@@ -67,7 +67,12 @@ class Summoner extends Component {
            </div>
        </div>
 
-        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ? <div><SummonerMatch name = {this.state.name} sumMatchList={sumMatchList} id={id} /> <button onClick={this.handleClick} className ="btn btn-default" >Voir plus de match </button></div> : <BlankComponent />}
+        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ?
+            <div className="col-xs-12">
+                <SummonerMatch name = {this.state.name} sumMatchList={sumMatchList} id={id} />
+                <button onClick={this.handleClick} className ="btn btn-default" >More games.. </button>
+            </div> :
+            <BlankComponent />}
 
       </React.Fragment>
     )
