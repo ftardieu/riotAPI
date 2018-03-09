@@ -8,7 +8,7 @@ class SummonerMatch extends Component {
 
   }
   state = {
-    name : this.props.name
+     name : this.props.name
   }
 
 
@@ -21,12 +21,12 @@ class SummonerMatch extends Component {
 
   render(){
     const {  endIndex   } = this.props.sumMatchList;
-
+    
     return(
       <React.Fragment>
         <div id = "gameitemList">
         {this.props.sumMatchList.matches.map((matches) =>
-            <SummonerMatchItem key = {matches.gameId} name = {this.state.name} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
+            <SummonerMatchItem key = {matches.gameId} name = {this.props.name} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
           )}
         </div>
       </React.Fragment>

@@ -19,8 +19,7 @@ class Home extends Component {
     }
 
     componentWillReceiveProps = async (nextProps) => {
-        console.log(nextProps.match.params)
-        console.log(this.state.name)
+
         if(this.state.summonerName !== nextProps.match.params.playerName){
             this.makeRequest(nextProps.match.params.playerName)
         }

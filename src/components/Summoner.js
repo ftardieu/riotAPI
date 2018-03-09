@@ -9,6 +9,8 @@ export const BlankComponent = () => <div>None</div>
 class Summoner extends Component {
   constructor(props){
     super(props)
+    this.state.startIndex = 0
+    this.state.endIndex = 1
      this.getSummonerInfo( props.id ,  props.accountId)
      this.getsummonerLeagueInfo( props.id )
   }
@@ -58,7 +60,7 @@ class Summoner extends Component {
 
 
   render(){
-    const { sumLeagueInfo ,id  , sumMatchList } = this.state
+    const { sumLeagueInfo ,id  , sumMatchList } = this.state;
     const { name, profileIconId, summonerLevel  } = this.props.sumData;
     const profileIcon  = api.getSummonerProfileIcon(profileIconId)
     return(
@@ -78,7 +80,7 @@ class Summoner extends Component {
 
         { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ?
             <div className="col-xs-12">
-                <SummonerMatch name = {this.state.name} sumMatchList={sumMatchList} id={id} />
+                <SummonerMatch name = {name} sumMatchList={sumMatchList} id={id} />
                 <button onClick={this.handleClick} className ="btn btn-default" >More games.. </button>
             </div> :
             <BlankComponent />}

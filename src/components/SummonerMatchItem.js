@@ -6,7 +6,6 @@ import SummonerMatchItemParticipant from './SummonerMatchItemParticipant'
 class SummonerMatchItem extends Component {
   constructor(props){
     super(props)
-     this.getSummonerInfoMatch( props.gameId)
 
   }
   state = {
@@ -42,7 +41,7 @@ class SummonerMatchItem extends Component {
     const response = await api.getSummonerMatch('euw1', gameId)
     const sumMatchItemInfo = await response.json()
 
-    this.getTeam(gameId,  sumMatchItemInfo)
+    this.getTeam(gameId,  sumMatchItemInfo)  
   }   
 
   getTeam = async ( gameId,  sumMatchItemInfo) => {
@@ -54,6 +53,8 @@ class SummonerMatchItem extends Component {
       var sumTeam2Kills = 0
       var sumTeam2Deaths = 0
       var sumTeam2Assists = 0
+      let summonerSpellName1
+      let summonerSpellName2
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
       let isWin = sumMatchItemInfo.participants[i].stats.win
@@ -68,11 +69,11 @@ class SummonerMatchItem extends Component {
 
         let spell1 = await api.getSpellById(sumMatchItemInfo.participants[i].spell1Id)
         let spellName1 = spell1.image.full 
-        var summonerSpellName1 = api.getSummonerSpellImg(spellName1)
+        summonerSpellName1 = api.getSummonerSpellImg(spellName1)
 
         let spell2 = await api.getSpellById(sumMatchItemInfo.participants[i].spell2Id)
         let spellName2 = spell2.image.full
-        var summonerSpellName2 = api.getSummonerSpellImg(spellName2)
+        summonerSpellName2 = api.getSummonerSpellImg(spellName2)
 
         var perk = sumMatchItemInfo.participants[i].stats.perk0
         var perkSubStyle = sumMatchItemInfo.participants[i].stats.perkSubStyle
@@ -124,9 +125,15 @@ class SummonerMatchItem extends Component {
   }
 
   componentWillReceiveProps = async (nextProps) => {
-    if(this.state.gameId !== nextProps.gameId && this.state.name !== nextProps.name){ 
+    if(this.state.gameId !== nextProps.gameId || this.state.name !== nextProps.name){ 
+      this.setState({name : this.state.name})
       this.getSummonerInfoMatch( nextProps.gameId)
+
     }
+  }
+  componentDidMount = async () => {
+         this.getSummonerInfoMatch( this.props.gameId)
+
   }
  
 
@@ -154,7 +161,6 @@ class SummonerMatchItem extends Component {
 
 
 
-      console.log(sumMatchItemInfo)
     }
  
     return(
