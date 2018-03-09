@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 import { Navbar,  Nav,  NavItem,  NavDropdown,  MenuItemFormControl ,MenuItem, FormGroup,  FormControl } from 'react-bootstrap';
-import Summoner from './components/Summoner'
-import SummonerError from './components/Error'
+import Home from './components/Home'
 import api from './riotAPI'
 
 
@@ -51,56 +50,10 @@ class App extends Component {
       return (
           <Router>
               <div>
-
-                  <Navbar collapseOnSelect>
-                    <Navbar.Header className = 'col-xs-3'>
-                      <Navbar.Brand>
-                        <a href="/">RiotAPI</a>
-                      </Navbar.Brand>
-                    </Navbar.Header>
-                      <Nav pullRight className='col-xs-9 '>
-                      { valid ? 
-                        <NavItem className='input-group col-xs-6 col-xs-offset-4' eventKey={1} href="#">
-                           <FormControl
-                            required
-                            autoFocus="true"
-                            type="text"
-                            value = { name }
-                            onKeyPress={this.handleEnterKey}
-                            palceholder="Your summoner name.."
-                            onChange={(e) => this.setState({ name: e.target.value })}
-                          />
-                          <div className="input-group-btn btn-search" >
-                             <button onClick={this.handleClick} className ="btn btn-default" ><i className="glyphicon glyphicon-search"></i></button>
-                          </div>
-
-                        </NavItem>
-                         : null }
-                          
-                      </Nav>
-                  </Navbar>
-
-                  <div className="container">
-                      { !valid ?
-                         
-                         <div className="input-group col-lg-4 col-lg-offset-4 add-on">
-                          <FormControl
-                            required
-                            autoFocus="true"
-                            type="text"
-                            value = { name }
-                            onKeyPress={this.handleEnterKey}
-                            palceholder="Your summoner name.."
-                            onChange={(e) => this.setState({ name: e.target.value })}
-                          />
-                           <div className="input-group-btn">
-                             <button onClick={this.handleClick} className ="btn btn-default" ><i className="glyphicon glyphicon-search"></i></button>
-                          </div>
-                         </div>
-                          : null }
-                      {sumData ? <Summoner sumData={sumData} id={sumData.id} accountId = {sumData.accountId} /> : null}
-                      {error ? <SummonerError /> : null}
-                  </div>
+                  <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route path="/player/:playerName" component={Home} />
+                  </Switch>
               </div>
           </Router>
       );

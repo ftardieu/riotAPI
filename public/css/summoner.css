@@ -1,25 +1,5 @@
-.summoner-info {
-    display: inline-block;
-    height: 18vh;
-    margin-bottom: 2%;
-}
-
-.summoner-face {
-    display: inline-block;
-    margin-right: 20px;
-    position: relative;
-}
-
-.summoner-profile {
-    display: inline-block;
-    position: relative;
-    height: 100%;
-    vertical-align: top;
-    line-height: 1.1;
-}
-
 .summoner-icon {
-    height: 125px;
+    height: 150px;
     display: block;
 }
 
@@ -33,6 +13,31 @@
     /*color: #d3a625;*/
     font-weight: bold;
     margin-left: 1%;
+}
+
+.summoner-info {
+    display: flex;
+    max-height: 150px;
+    margin-bottom: 2%;
+}
+
+.summoner-face {
+    margin-right: 5px;
+    position: relative;
+    box-shadow: 0 1px #dcdfdf;
+}
+
+.summoner-profile {
+    position: relative;
+    flex: 1;
+    vertical-align: top;
+    padding: 15px;
+    margin-left: 5px;
+    line-height: 1.1;
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
 }
 
 /* SUMMONER RANKS */
@@ -63,7 +68,7 @@
 }
 
 .rank-image.large {
-    margin-top: -13%;
+    margin-top: -12%;
     height: 100%;
 }
 
