@@ -10,6 +10,7 @@ class SummonerMatchItem extends Component {
 
   }
   state = {
+    name : this.props.name,
     gameId : null,
     isTeam1 : null,
     sumMatchItemInfo: null,
@@ -127,7 +128,7 @@ class SummonerMatchItem extends Component {
   }
 
   componentWillReceiveProps = async (nextProps) => {
-    if(this.state.gameId !== nextProps.gameId){ 
+    if(this.state.gameId !== nextProps.gameId && this.state.name !== nextProps.name){ 
       this.getSummonerInfoMatch( nextProps.gameId)
     }
   }
