@@ -1,0 +1,96 @@
+.matchItemList {
+}
+
+.matchItem {
+    padding: 10px;
+    font-size: 11px;
+    margin: 5px 0;
+}
+
+.matchContent {
+    display: table;
+    width: 100%;
+}
+
+.gameInfo{
+    display: inline-block;
+}
+
+.gameInfo , .gameParticipant , .gameSettingInfo , .KDA , .statsChamp , .summonerItemsList , .summonerWards{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.gameWin {
+    background-color:#a3cfec;
+    border: 1px solid #99b9cf;
+}
+.gameLose {
+    background-color:#e2b6b3;
+    border: 1px solid #cea7a7;
+}
+.gameInfo {
+    width: 95px;
+}
+
+.gameSettingInfo {
+    width: 145px;
+}
+
+.summonerIcon{
+    border-radius: 50%;
+}
+
+.summonerSpell, .summonerChamp, .summonerRune, .summonerItem, .ward {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.summonerItem {
+    margin: 2px;
+}
+
+.summonerItem img {
+    border-radius: 3px;
+}
+
+.KDA {
+    width: 100px;
+}
+
+.KDA .stat {
+    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.KDA .stat .black {
+    font-weight: bold;
+    color: #555e5e;
+}
+
+.KDA .stat .red {
+    font-weight: bold;
+    color: #c6443e;
+}
+
+.spell , .rune{
+    display: block;
+}
+
+.summonerItems{
+    display: table;
+}
+.gameitemList{
+    text-align: center
+}
+/** END MATCHES **/
+
+.ulItemParticipant{
+list-style-type:none;
+}
+
+.target{
+font-weight: bold;
+}
+

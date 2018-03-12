@@ -24,7 +24,7 @@ class SummonerMatch extends Component {
 
     return(
       <React.Fragment>
-        <div id = "gameitemList">
+        <div className="matchItemList">
         {this.props.sumMatchList.matches.map((matches) =>
             <SummonerMatchItem key = {matches.gameId} name = {this.state.name} gameId = {matches.gameId} id ={this.props.id} sumMatchItem = {matches} />
           )}

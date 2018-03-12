@@ -33,7 +33,7 @@ class SummonerMatchItemParticipant extends Component {
               {team.map((participant,i) =>
                   <React.Fragment key = {'react ' + gameId + i } >
                     <li>
-                        <img height = '25px' key= { gameId + participant[1] + i} alt ='championIcon' src = {participant[1]} />
+                        <img height = '16px' key= { gameId + participant[1] + i} alt ='championIcon' src = {participant[1]} />
                         <Link to={`/player/${participant[0]}`}>
                             <span key= { gameId + participant[0] + i} className  = { participant[2] ? 'target' : null}>
                                 {participant[0]}
