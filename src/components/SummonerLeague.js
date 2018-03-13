@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Section } from 'react-materialize'
 import SummonerLeagueSoloQueue from './SummonerLeagueSoloQueue'
-import SummonerLeagueTeamQueue from './SummonerLeagueTeamQueue'
 
 export const BlankComponent = (props) => <div className="summoner-rank col-xs-4"><img className={props.size + " rank-image"} src='../images/base-icons/provisional.png' alt=""/></div>
 

@@ -42,3 +42,29 @@
 .btn-search{
   display:block;
 }
+
+.nameTableSum{
+  width: 20%
+}
+
+.itemTableSum{
+  width: 40%
+}
+.kdaTableSum{
+  width: 10%
+}
+.damageTableSum{
+  width: 10%
+}
+.csTableSum{
+  width: 10%
+}
+.goldTableSum{
+  width: 10%
+}
+#tableSum1{
+  background-color: #d8e4ec
+}
+#tableSum2{
+  background-color: #e9e0e0
+}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import {  Row , Section } from 'react-materialize'
-// import api from '../riotAPI'
+
 
 class SummonerLeagueSoloQueue extends Component {
 
@@ -43,7 +42,7 @@ class SummonerLeagueSoloQueue extends Component {
     return(
       <div className="summoner-rank col-xs-4">
           <div className="rank-info col-xs-6">
-              <img src={iconPath} />
+              <img alt='' src={iconPath} />
           </div>
           <div className="rank-info col-xs-6">
               <span className="rank-label">{ rankLabel }</span>

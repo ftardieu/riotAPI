@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import App from '../App'
+import {  Link } from "react-router-dom";
 
 class SummonerMatchItemParticipant extends Component {
 
@@ -33,10 +32,10 @@ class SummonerMatchItemParticipant extends Component {
               {team.map((participant,i) =>
                   <React.Fragment key = {'react ' + gameId + i } >
                     <li>
-                        <img height = '16px' key= { gameId + participant[1] + i} alt ='championIcon' src = {participant[1]} />
-                        <Link to={`/player/${participant[0]}`}>
-                            <span key= { gameId + participant[0] + i} className  = { participant[2] ? 'target' : null}>
-                                {participant[0]}
+                        <img height = '16px' key= { gameId + participant[2] + i} alt ='championIcon' src = {participant[2]} />
+                        <Link to={`/player/${participant[1]}`}>
+                            <span key= { gameId + participant[1] + i} className  = { participant[3] ? 'target' : null}>
+                                {participant[1]}
                             </span>
                         </Link>
                      </li>

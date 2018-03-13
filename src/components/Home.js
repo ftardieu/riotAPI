@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Navbar,  Nav,  NavItem,  NavDropdown,  MenuItemFormControl ,MenuItem, FormGroup,  FormControl } from 'react-bootstrap';
+import { Navbar,  FormControl } from 'react-bootstrap';
 import Summoner from './Summoner'
 import SummonerError from './Error'
 import api from '../riotAPI'
+
+import {  Link } from "react-router-dom";
 
 class Home extends Component {
   constructor(props){
@@ -15,7 +17,8 @@ class Home extends Component {
         sumData: null,
         error:false,
         valid: false,
-        summonerName: ""
+        summonerName: "",
+        favorites : JSON.parse(localStorage.getItem('favorites'))
     }
 
     componentWillReceiveProps = async (nextProps) => {
@@ -24,7 +27,6 @@ class Home extends Component {
             this.makeRequest(nextProps.match.params.playerName)
         }
     }
-
 
 
     handleEnterKey = (e) => {
@@ -36,6 +38,9 @@ class Home extends Component {
         const { name } = this.state
         this.props.history.push('/player/'+ name)
     }
+
+
+
 
     makeRequest = async (name) =>{
         if(name) {
@@ -56,8 +61,20 @@ class Home extends Component {
 
     }
 
+    onClickDeleteLocal(favoris){
+     let  favorites = JSON.parse(localStorage.getItem('favorites'))
+     let newFavoris = []
+      favorites.forEach(function(fav){
+        if (fav !== favoris) {
+            newFavoris.push(fav)
+        }
+      })
+      localStorage.setItem('favorites' , JSON.stringify(newFavoris))
+      this.setState({ favorites :  newFavoris})
+    }
+
   render(){
-    const { name, sumData, error, valid } = this.state
+    const { name, sumData, error, valid , favorites} = this.state
     return(
       <React.Fragment>
         <Navbar collapseOnSelect>
@@ -86,7 +103,7 @@ class Home extends Component {
 
         <div className="container">
             { !valid ?
-
+              <div>
                 <div className="input-group col-lg-4 col-lg-offset-4 add-on">
                   <FormControl
                       required
@@ -100,9 +117,25 @@ class Home extends Component {
                   <div className="input-group-btn">
                     <button onClick={this.handleClick} className ="btn btn-default" ><i className="glyphicon glyphicon-search" /></button>
                   </div>
+                  
+
+                </div> 
+                <div className ='col-lg-offset-4 col-lg-4'>
+                 {favorites.length > 0  ?  <div className ='col-lg-12 '><span>Favoris : </span></div> :null }
+                  {favorites ? favorites.map((favoris,i) => 
+                    <div className ='col-lg-4 ' key = {i} >
+                      <Link to={`/player/${favoris}`}>
+                        <span >{favoris}</span>
+                      </Link>
+                      <button onClick={(e) => this.onClickDeleteLocal(favoris)} ><i className = 'glyphicon glyphicon-star'></i></button>
+                    </div>
+                  )  
+                  : null }
                 </div>
+              </div>
+
                 : null }
-            {sumData ? <Summoner sumData={sumData} id={sumData.id} accountId = {sumData.accountId} /> : null}
+            {sumData ? <Summoner name= {name} sumData={sumData} id={sumData.id} accountId = {sumData.accountId} /> : null}
             {error ? <SummonerError /> : null}
         </div>
       </React.Fragment>
