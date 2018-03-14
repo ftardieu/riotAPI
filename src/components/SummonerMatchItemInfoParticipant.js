@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {  Link } from "react-router-dom";
 import api from '../riotAPI'
+
 class SummonerMatchItemInfoParticipant extends Component {
 
 	state = {
@@ -10,12 +10,6 @@ class SummonerMatchItemInfoParticipant extends Component {
 		data : this.props.data,
 		team1 : [] , 
 		team2 : [],
-		isSummonerWin : null , 
-		summonerIcon : null , 
-		summonerSpellName1 : null,
-		summonerSpellName2 : null , 
-		perk : null , 
-		perkSubStyle : null , 
 		kills:null,
 		deaths:null,
 		assists :null,
@@ -24,12 +18,6 @@ class SummonerMatchItemInfoParticipant extends Component {
 		items: [],
 		csNumber : null,
 		csNumberNeutral : null,
-		sumTeam1Kills:null,
-		sumTeam2Kills:null,
-		visionWardsBoughtInGame:null,
-		wardsKilled:null,
-		wardsPlaced:null,
-		toggleMatch : false,
 		goldEarned : null
 	}
 
@@ -44,12 +32,8 @@ class SummonerMatchItemInfoParticipant extends Component {
 
 	componentWillMount = async() =>{
 		const { data } = this.state
-		let sumTeam1Kills = 0
-		let sumTeam2Kills = 0
-
 		let summonerSpellName1
 		let summonerSpellName2
-		let isSummonerWin
 		let summonerIcon
 		let perk
 		let perkSubStyle
@@ -61,20 +45,13 @@ class SummonerMatchItemInfoParticipant extends Component {
 		let csNumberNeutral
 		let isTeam1
 		let totalDamageDealtToChampions
-		let visionWardsBoughtInGame
-		let wardsKilled
-		let wardsPlaced
 		let items
 		let goldEarned
 
-		let isWin = data.stats.win
 		let champion = await api.getChampionById(data.championId)
 		let iconName = champion.image.full
 		iconName = api.getChampionImg(iconName)
  		var championName = champion.name
-
-
-        isSummonerWin = isWin
         summonerIcon = iconName
 
         let spell1 = await api.getSpellById(data.spell1Id)
@@ -108,25 +85,17 @@ class SummonerMatchItemInfoParticipant extends Component {
         isTeam1 = data.teamId === 100
         totalDamageDealtToChampions = data.stats.totalDamageDealtToChampions
 
-        visionWardsBoughtInGame = data.stats.visionWardsBoughtInGame
 
-        wardsKilled = data.stats.wardsKilled
-
-        wardsPlaced = data.stats.wardsPlaced
-
-        this.setState({   isSummonerWin ,summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists , champLevel ,
-         items  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame, championName , totalDamageDealtToChampions , goldEarned})
+        this.setState({   summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists , champLevel ,
+         items  , csNumber, csNumberNeutral    , isTeam1 , championName , totalDamageDealtToChampions , goldEarned})
 	}
 
 	render(){
-	    const { gameId , data, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
-	     items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame, championName , toggleMatch , totalDamageDealtToChampions , goldEarned} = this.state
-		const {  team ,gameDuration} = this.props
+	    const {  data,  summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
+	     items , csNumber , csNumberNeutral , isTeam1     , championName  , totalDamageDealtToChampions , goldEarned} = this.state
+		const { sumKill , team ,gameDuration} = this.props
 	    if (data) {
 	      var quotient = Math.floor(gameDuration/60);
-	      var remainder = gameDuration % 60;
-	      var gameResult =  isSummonerWin ? 'Victory' : 'Defeat' 
-	      var gameMode = api.getGameMode(data.queueId)
 	      
 	      var perkImg = "../images/perk/" + perk +'.png'
 	      var perkSubStyleImg = "../images/perkStyle/" + perkSubStyle + '.png'
@@ -134,8 +103,8 @@ class SummonerMatchItemInfoParticipant extends Component {
 	      var kda = deaths > 0 ? ((kills+assists) / deaths ).toFixed(2) +":1" : "Perfect"
 	      var totalCs = csNumber + csNumberNeutral
 	      var totalCsPerMinute = (totalCs / quotient).toFixed(1)
-
-	      var participationKills = isTeam1 ? Math.round( (kills + assists) / sumTeam1Kills *100 )  :  Math.round( (kills + assists) / sumTeam2Kills *100 )
+	      console.log(team)
+	      var participationKills = isTeam1 ? Math.round( (kills + assists) / sumKill *100 )  :  Math.round( (kills + assists) / sumKill*100 )
 	    }
 
 		return(
@@ -169,7 +138,7 @@ class SummonerMatchItemInfoParticipant extends Component {
 		                      </div>
 		                    </div>
                  		</div>
-                 		<div className = 'summonerName' className  = { team[3] ? 'target' : null}> {team[1]}</div>
+                 		<div  className  = { team[3] ? ' summonerName target' : 'summonerName'}> {team[1]}</div>
 
 					</td>
 
@@ -187,11 +156,7 @@ class SummonerMatchItemInfoParticipant extends Component {
 	                          </div>                  
 	                          <div className = "summonerItem" >
 	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
-	                          </div>     
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
-	                          </div> 
-	                       
+	                          </div>                            
 	                       
 	                          <div className = "summonerItem" >
 	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
@@ -202,6 +167,9 @@ class SummonerMatchItemInfoParticipant extends Component {
 	                          <div className = "summonerItem" >
 	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
 	                          </div>
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
+	                          </div> 
 	                        </div>
 	                      
 	                    </div> : null }

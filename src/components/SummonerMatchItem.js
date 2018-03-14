@@ -7,7 +7,7 @@ class SummonerMatchItem extends Component {
 
   state = {
     name : this.props.name,
-    gameId : null,
+    gameId : this.props.gameId,
     isTeam1 : null,
     sumMatchItemInfo: null,
     team1 : [] , 
@@ -39,7 +39,7 @@ class SummonerMatchItem extends Component {
    getSummonerInfoMatch = async ( gameId) => {
     const response = await api.getSummonerMatch('euw1', gameId)
     const sumMatchItemInfo = await response.json()
-
+     
     this.getTeam(gameId,  sumMatchItemInfo)  
   }   
 
@@ -65,7 +65,6 @@ class SummonerMatchItem extends Component {
       let csNumber
       let csNumberNeutral
       let isTeam1
-      let totalDamageDealtToChampions
       let visionWardsBoughtInGame
       let wardsKilled
       let wardsPlaced
@@ -112,14 +111,13 @@ class SummonerMatchItem extends Component {
         csNumber =  sumMatchItemInfo.participants[i].stats.totalMinionsKilled  
         csNumberNeutral =  sumMatchItemInfo.participants[i].stats.neutralMinionsKilled  
         isTeam1 = sumMatchItemInfo.participants[i].teamId === 100
-        totalDamageDealtToChampions = sumMatchItemInfo.participants[i].stats.totalDamageDealtToChampions
 
          visionWardsBoughtInGame = sumMatchItemInfo.participants[i].stats.visionWardsBoughtInGame
 
           wardsKilled = sumMatchItemInfo.participants[i].stats.wardsKilled
 
          wardsPlaced = sumMatchItemInfo.participants[i].stats.wardsPlaced
-
+         this.props.buttonclick(sumMatchItemInfo.participants[i] , sumMatchItemInfo.gameId , this.props.id)
       }
 
       if (sumMatchItemInfo.participants[i].teamId === 100 ) {
@@ -131,6 +129,7 @@ class SummonerMatchItem extends Component {
       }else{
 
         sumTeam2Kills += sumMatchItemInfo.participants[i].stats.kills
+
         sumTeam2Deaths += sumMatchItemInfo.participants[i].stats.deaths
         sumTeam2Assists += sumMatchItemInfo.participants[i].stats.assists
         team2[i] = [ sumMatchItemInfo.participantIdentities[i].participantId,sumMatchItemInfo.participantIdentities[i].player.summonerName ,  iconName  , isSummonerTarget , isWin , sumTeam2Kills , sumTeam2Deaths ,sumTeam2Assists]
@@ -145,13 +144,12 @@ class SummonerMatchItem extends Component {
     this.getSummonerInfoMatch( this.props.gameId)
 
   }
- 
-  componentWillReceiveProps (nextProps) {
-    if(this.state.gameId !== nextProps.gameId || this.state.name !== nextProps.name){ 
-      this.getSummonerInfoMatch( nextProps.gameId)
 
-    }
-  }
+  // componentWillReceiveProps = async (nextProps) => {
+  //   if(  this.state.name !== nextProps.name || this.state.gameId !== nextProps.gameId ){ 
+  //     this.getSummonerInfoMatch( nextProps.gameId)
+  //   }
+  // }
 
 
     handleDropDownMatch = async () => {

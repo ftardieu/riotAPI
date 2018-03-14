@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import {  Link } from "react-router-dom";
 import SummonerMatchItemInfoParticipant from './SummonerMatchItemInfoParticipant'
 
 
@@ -49,7 +48,7 @@ class SummonerMatchItemInfo extends Component {
               </thead>
                  <tbody key = {'table' } >
                {team ? team.map((value, i1) => 
-                    <SummonerMatchItemInfoParticipant id = {id} key = {i1} data = {datas.participants[value[0]-1]} teamId = {team} gameDuration = {gameDuration} team = {value} /> 
+                    <SummonerMatchItemInfoParticipant id = {id} key = {i1} sumKill = {team[0][5]} data = {datas.participants[value[0]-1]} teamId = {team} gameDuration = {gameDuration} team = {value} /> 
                 ) : null }
                   </tbody>
             
@@ -74,7 +73,7 @@ class SummonerMatchItemInfo extends Component {
 
                  <tbody key = {'table2' }>
              {team ? team.map((value, i2) => 
-                  <SummonerMatchItemInfoParticipant id = {id} key = {i2} data = {datas.participants[value[0]-1]} gameDuration = {gameDuration} teamId = {team} team = {value} /> 
+                  <SummonerMatchItemInfoParticipant id = {id} key = {i2} sumKill = {team[5][5]} data = {datas.participants[value[0]-1]} gameDuration = {gameDuration} teamId = {team} team = {value} /> 
               ) : null }
                   </tbody>
            </table>
