@@ -121,7 +121,7 @@ class Home extends Component {
 
                 </div> 
                 <div className ='col-lg-offset-4 col-lg-4'>
-                 {favorites.length > 0  ?  <div className ='col-lg-12 '><span>Favoris : </span></div> :null }
+                 {favorites && favorites.length > 0  ?  <div className ='col-lg-12 '><span>Favoris : </span></div> :null }
                   {favorites ? favorites.map((favoris,i) => 
                     <div className ='col-lg-4 ' key = {i} >
                       <Link to={`/player/${favoris}`}>

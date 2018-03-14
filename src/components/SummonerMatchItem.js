@@ -162,7 +162,6 @@ class SummonerMatchItem extends Component {
   render(){
     const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
      items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame, championName , toggleMatch} = this.state
-
     if (sumMatchItemInfo) {
       const { gameDuration } = sumMatchItemInfo
       var quotient = Math.floor(gameDuration/60);
@@ -178,7 +177,6 @@ class SummonerMatchItem extends Component {
       var totalCsPerMinute = (totalCs / quotient).toFixed(1)
 
       var participationKills = isTeam1 ? Math.round( (kills + assists) / sumTeam1Kills *100 )  :  Math.round( (kills + assists) / sumTeam2Kills *100 )
-      console.log(sumMatchItemInfo)
     }
 
     return(
@@ -291,8 +289,8 @@ class SummonerMatchItem extends Component {
                </div>
                : null }
                 <div className = 'gameParticipant'>
-                  <SummonerMatchItemParticipant key = {gameId + 'team1'} id ={this.props.id} gameId = {gameId} team = { team1 }  />   
-                  <SummonerMatchItemParticipant key = {gameId + 'team2'} id ={this.props.id} gameId = {gameId}  team = { team2 }  /> 
+                  <SummonerMatchItemParticipant key = {gameId + 'team1'}  id ={this.props.id} gameId = {gameId} team = { team1 }  />   
+                  <SummonerMatchItemParticipant key = {gameId + 'team2'}  id ={this.props.id} gameId = {gameId}  team = { team2 }  /> 
                 </div>  
                 <div className = "dropDownMatch" >
                   <button onClick = {this.handleDropDownMatch}> <i className ="  glyphicon glyphicon-menu-down" ></i></button>

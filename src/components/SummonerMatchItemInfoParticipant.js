@@ -29,7 +29,8 @@ class SummonerMatchItemInfoParticipant extends Component {
 		visionWardsBoughtInGame:null,
 		wardsKilled:null,
 		wardsPlaced:null,
-		toggleMatch : false
+		toggleMatch : false,
+		goldEarned : null
 	}
 
 	getSummonerInfoMatch = async ( gameId) => {
@@ -42,13 +43,10 @@ class SummonerMatchItemInfoParticipant extends Component {
 	}
 
 	componentWillMount = async() =>{
-		const { data , gameId} = this.state
+		const { data } = this.state
 		let sumTeam1Kills = 0
-		let sumTeam1Deaths = 0
-		let sumTeam1Assists = 0
 		let sumTeam2Kills = 0
-		let sumTeam2Deaths = 0
-		let sumTeam2Assists = 0
+
 		let summonerSpellName1
 		let summonerSpellName2
 		let isSummonerWin
@@ -67,15 +65,15 @@ class SummonerMatchItemInfoParticipant extends Component {
 		let wardsKilled
 		let wardsPlaced
 		let items
+		let goldEarned
 
-		let isSummonerTarget = false
 		let isWin = data.stats.win
 		let champion = await api.getChampionById(data.championId)
 		let iconName = champion.image.full
 		iconName = api.getChampionImg(iconName)
  		var championName = champion.name
 
-        isSummonerTarget = true;
+
         isSummonerWin = isWin
         summonerIcon = iconName
 
@@ -93,6 +91,7 @@ class SummonerMatchItemInfoParticipant extends Component {
         kills = data.stats.kills
         deaths = data.stats.deaths
         assists = data.stats.assists
+        goldEarned = data.stats.goldEarned
 
         champLevel = data.stats.champLevel
         items = []
@@ -116,15 +115,14 @@ class SummonerMatchItemInfoParticipant extends Component {
         wardsPlaced = data.stats.wardsPlaced
 
         this.setState({   isSummonerWin ,summonerIcon , summonerSpellName1 , summonerSpellName2 , perk , perkSubStyle , kills ,deaths,assists , champLevel ,
-         items  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame, championName })
+         items  , csNumber, csNumberNeutral , sumTeam1Kills , sumTeam2Kills , isTeam1 , wardsPlaced  ,wardsKilled , visionWardsBoughtInGame, championName , totalDamageDealtToChampions , goldEarned})
 	}
 
 	render(){
 	    const { gameId , data, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
-	     items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame, championName , toggleMatch} = this.state
-		const {  team } = this.props
+	     items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame, championName , toggleMatch , totalDamageDealtToChampions , goldEarned} = this.state
+		const {  team ,gameDuration} = this.props
 	    if (data) {
-	      const { gameDuration } = data
 	      var quotient = Math.floor(gameDuration/60);
 	      var remainder = gameDuration % 60;
 	      var gameResult =  isSummonerWin ? 'Victory' : 'Defeat' 
@@ -148,22 +146,22 @@ class SummonerMatchItemInfoParticipant extends Component {
 					    <div className = "gameSettingInfo">
 		                    <div>
 		                      <div className ='summonerChamp'>
-		                        <img height = '50px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}></img>
+		                        <img height = '40px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}></img>
 		                      </div>
 		                      <div className ="summonerSpell">
 		                        <div className ='spell'>
-		                          <img height = '25px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}></img>
+		                          <img height = '20px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}></img>
 		                        </div>
 		                        <div className ='spell'>
-		                          <img height = '25px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}></img>
+		                          <img height = '20px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}></img>
 		                        </div>
 		                      </div>
 		                      <div className='summonerRune'>
 		                        <div className ='rune'>
-		                          <img height = '25px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} ></img>
+		                          <img height = '20px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} ></img>
 		                        </div>
 		                        <div className ='rune'>
-		                          <img height = '25px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} ></img>
+		                          <img height = '20px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} ></img>
 		                        </div>
 		                      </div>
 		                      <div>
@@ -171,6 +169,45 @@ class SummonerMatchItemInfoParticipant extends Component {
 		                      </div>
 		                    </div>
                  		</div>
+                 		<div className = 'summonerName' className  = { team[3] ? 'target' : null}> {team[1]}</div>
+
+					</td>
+
+					<td>
+						{items ? 
+		                    <div className ='summonerItemsList'>
+	                      <div className ='summonerItems'>
+	                       
+
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
+	                          </div>                  
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
+	                          </div>                  
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
+	                          </div>     
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
+	                          </div> 
+	                       
+	                       
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
+	                          </div>                  
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
+	                          </div>                  
+	                          <div className = "summonerItem" >
+	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
+	                          </div>
+	                        </div>
+	                      
+	                    </div> : null }
+
+					</td>
+					<td>
 	                    <div className = "KDA">
 		                    <div className="stat">
 		                      <span className="black">{ kills }</span> /
@@ -182,12 +219,28 @@ class SummonerMatchItemInfoParticipant extends Component {
 		                    </div>
 	                    </div>
 
+
 					</td>
-					<td>{ team[1] }</td>
-					<td>{ team[1] }</td>
-					<td>{ team[1] }</td>
-					<td>{ team[1] }</td>
-					<td>{ team[1] }</td>
+					<td>{ totalDamageDealtToChampions }</td>
+					<td>
+	                    <div className= "statsChamp" >
+                    
+		                    <div className ='level'>
+		                      <span>Level {champLevel}</span>
+
+		                    </div>
+		                    
+		                    <div className ='cs'>
+		                      <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
+
+		                    </div>                  
+		                    <div className ='participationKills'>
+		                      <span> P/Kills {participationKills} %</span>
+		                    </div>
+
+                  		</div>
+					</td>
+					<td>{ goldEarned }</td>
 				</tr>
 			</React.Fragment>
 		)

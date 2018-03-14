@@ -27,8 +27,9 @@ class SummonerMatchItemInfo extends Component {
 
   render(){
 
-    const { datas ,team ,info  } = this.props
-    console.log(team)
+    const { datas ,team ,info  ,id } = this.props
+    const gameDuration = datas.gameDuration
+
     return(
       <React.Fragment>
 
@@ -46,11 +47,11 @@ class SummonerMatchItemInfo extends Component {
                 <th className ='goldTableSum'>Gold</th>
               </tr>
               </thead>
+                 <tbody key = {'table' } >
                {team ? team.map((value, i1) => 
-                 <tbody key = {'table' + i1} >
-                    <SummonerMatchItemInfoParticipant key = {i1} data = {datas.participants[value[0]-1]} teamId = {team} team = {value} /> 
-                  </tbody>
+                    <SummonerMatchItemInfoParticipant id = {id} key = {i1} data = {datas.participants[value[0]-1]} teamId = {team} gameDuration = {gameDuration} team = {value} /> 
                 ) : null }
+                  </tbody>
             
 
            </table>
@@ -71,11 +72,11 @@ class SummonerMatchItemInfo extends Component {
           </tr>
           </thead>
 
+                 <tbody key = {'table2' }>
              {team ? team.map((value, i2) => 
-                 <tbody key = {'table' + i2}>
-                  <SummonerMatchItemInfoParticipant key = {i2} data = {datas.participants[value[0]-1]} teamId = {team} team = {value} /> 
-                  </tbody>
+                  <SummonerMatchItemInfoParticipant id = {id} key = {i2} data = {datas.participants[value[0]-1]} gameDuration = {gameDuration} teamId = {team} team = {value} /> 
               ) : null }
+                  </tbody>
            </table>
         </div>
 

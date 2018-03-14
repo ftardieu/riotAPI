@@ -69,14 +69,17 @@ class Summoner extends Component {
   }
 
     handleClickLocal = () => {
-      var favorites = this.state.favorites
+      var favorites = this.state.favorites || []
       let isFound = true
       let favoriteName =  this.props.sumData.name
-      favorites.forEach(function(favoris){
+      if (favorites && favorites.length > 0) {
+        favorites.forEach(function(favoris){
         if(favoris === favoriteName){
           isFound = false
         }
       })
+      }
+      
       if (isFound) {
         favorites.push(this.props.sumData.name )
         localStorage.setItem('favorites' , JSON.stringify(favorites))
@@ -88,11 +91,13 @@ class Summoner extends Component {
       var favorites = this.state.favorites
       let isFound = false
       let favoriteName =  this.props.sumData.name
-      favorites.forEach(function(favoris){
-        if(favoris === favoriteName){
-          isFound = true
-        }
-      })
+      if (favorites && favorites.length > 0) {
+        favorites.forEach(function(favoris){
+          if(favoris === favoriteName){
+            isFound = true
+          }
+        })
+      }
 
       return isFound
     }
