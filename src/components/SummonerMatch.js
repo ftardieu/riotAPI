@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SummonerMatchItem from './SummonerMatchItem'
-import rcl from "react-chart-doughnut";
 import { Doughnut } from "react-chartjs";
 
 
@@ -140,6 +139,14 @@ class SummonerMatch extends Component {
                         </div>
                         <div className ="statRatio">
                             <span> {kda.trim()} KDA </span>
+                        </div>
+                        <div className="win-ratio">
+                            <strong>{ moyWin }% Win Rate</strong>
+                        </div>
+                        <div>
+                            <span className="black">{ totalGames }G</span>
+                            <span className="blue"> { totalWin }W</span>
+                            <span className="red"> { totalLose }L</span>
                         </div>
                     </div>
                 </div>

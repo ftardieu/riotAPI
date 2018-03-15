@@ -2,7 +2,7 @@
 }
 
 .matchItem {
-    font-size: 11px;
+    font-size: 10px;
     height: 110px;
 }
 
@@ -42,7 +42,6 @@
     margin: 5px 0;
 }
 
-
 .gameInfo{
     display: inline-block;
     text-align: center;
@@ -52,6 +51,10 @@
     display: table-cell;
     vertical-align: middle;
     padding: 5px;
+}
+
+.summonerItemsList {
+    width: 13%;
 }
 
 .gameLose .gameParticipant a {
@@ -75,23 +78,27 @@
     border: 1px solid #cea7a7;
 }
 .gameInfo {
-    width: 150px;
+    width: 10%;
 }
 
 .statsChamp {
-    width: 100px;
+    width: 10%;
+}
+
+.gameParticipant {
+    width: 30%;
 }
 
 .gameParticipant .game-team{
-    width: 150px;
+    width: 50%;
 }
 
 .gameSettingInfo {
-    width: 145px;
+    width: 15%;
 }
 
 .participant-row .gameSettingInfo {
-    width: auto;
+    /*width: auto;*/
 }
 
 .summonerIcon{
@@ -111,8 +118,12 @@
     border-radius: 3px;
 }
 
+.win-ratio {
+    text-align: center;
+}
+
 .KDA ,.summonerName{
-    width: 100px;
+    width: 10%;
 }
 
 .KDA .stat {
@@ -121,23 +132,22 @@
     white-space: nowrap;
 }
 
-.stats .KDA .statRatio {
+.stats .KDA {
     text-align: center;
 }
 
-.KDA .stat .black {
-    font-weight: bold;
-    color: #555e5e;
+
+.summonerChamp img{
+    height: 45px;
 }
 
-.KDA .stat .red {
-    font-weight: bold;
-    color: #c6443e;
-}
-
-.spell , .rune{
+.spell, .rune{
     display: block;
     margin-right: 5px;
+}
+
+.spell img, .rune img {
+    height: 22px;
 }
 
 .participant-row .spell, .participant-row .rune {
@@ -177,7 +187,7 @@
 }
 
 .btn-search{
-  display:block;
+    display:block;
 }
 
 .summoner-champ-summary, .summoner-spell-summary, .summoner-rune-summary {
@@ -205,23 +215,23 @@
 }
 
 .name-table-summary{
-  width: 30%
+    width: 30%
 }
 
 .item-table-summary{
-  width: 30%
+    width: 30%
 }
 .kda-table-summary{
-  width: 10%
+    width: 10%
 }
 .damage-table-summary{
-  width: 10%
+    width: 10%
 }
 .cs-table-summary{
-  width: 10%
+    width: 10%
 }
 .gold-table-summary{
-  width: 10%
+    width: 10%
 }
 
 .summonerChamp {
@@ -233,8 +243,8 @@
     margin-bottom: 0;
 }
 .table-participants-1 {
-  background-color: #d8e4ec
+    background-color: #d8e4ec
 }
 .table-participants-2 {
-  background-color: #e9e0e0
+    background-color: #e9e0e0
 }

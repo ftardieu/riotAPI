@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  Link } from "react-router-dom";
+import { Line } from "react-chartjs";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import api from '../riotAPI'
 
@@ -97,23 +98,29 @@ class SummonerMatchItemInfoParticipant extends Component {
 	     items , csNumber , csNumberNeutral , isTeam1     , championName  , totalDamageDealtToChampions , goldEarned} = this.state
 		const { sumKill , team ,gameDuration} = this.props
 	    if (data) {
-	      var quotient = Math.floor(gameDuration/60);
-	      
-	      var perkImg = "../images/perk/" + perk +'.png'
-	      var perkSubStyleImg = "../images/perkStyle/" + perkSubStyle + '.png'
+		  var quotient = Math.floor(gameDuration/60);
 
-	      var kda = deaths > 0 ? ((kills+assists) / deaths ).toFixed(2) +":1" : "Perfect"
-	      var totalCs = csNumber + csNumberNeutral
-	      var totalCsPerMinute = (totalCs / quotient).toFixed(1)
-	      console.log(team)
-	      var participationKills = isTeam1 ? Math.round( (kills + assists) / sumKill *100 )  :  Math.round( (kills + assists) / sumKill*100 )
+		  var perkImg = "../images/perk/" + perk +'.png'
+		  var perkSubStyleImg = "../images/perkStyle/" + perkSubStyle + '.png'
+
+		  var kda = deaths > 0 ? ((kills+assists) / deaths ).toFixed(2) +":1" : "Perfect"
+		  var totalCs = csNumber + csNumberNeutral
+		  var totalCsPerMinute = (totalCs / quotient).toFixed(1)
+		  var participationKills = isTeam1 ? Math.round( (kills + assists) / sumKill *100 )  :  Math.round( (kills + assists) / sumKill*100 )
+			var damagePercent = ( totalDamageDealtToChampions /this.props.maxDamage * 100)
 	    }
 
-        const tooltip = (
+        const championTooltip = (
 			<Tooltip id="tooltip">
 				<span>{ championName }</span>
 			</Tooltip>
         );
+
+	    const damageTooltip = (
+			<Tooltip id="tooltip">
+				<span>{ totalDamageDealtToChampions }</span>
+			</Tooltip>
+		);
 
 
 		return(
@@ -123,7 +130,7 @@ class SummonerMatchItemInfoParticipant extends Component {
 					<td>
 						<div className = "gameSettingInfo">
 							  <div className ='summoner-champ-summary'>
-								  <OverlayTrigger placement="right" overlay={tooltip}>
+								  <OverlayTrigger placement="right" overlay={championTooltip}>
 									<img height = '32px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}/>
 								  </OverlayTrigger>
 								  <div className ='summoner-level-summary'>
@@ -194,12 +201,18 @@ class SummonerMatchItemInfoParticipant extends Component {
 
 
 					</td>
-					<td>{ totalDamageDealtToChampions }</td>
+					<td>
+						<OverlayTrigger placement="right" overlay={damageTooltip}>
+							<div className="progress">
+								<div className={"progress-bar " + (isTeam1 ? '': 'bg-red' )} role="progressbar" style={{width: damagePercent.toFixed(2)+'%'}} aria-valuenow={damagePercent} aria-valuemin="0" aria-valuemax="100"/>
+							</div>
+						</OverlayTrigger>
+					</td>
 					<td>
 	                    <div className= "statsChamp" >
 		                    <div className='cs'>
 		                      <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
-		                    </div>                  
+		                    </div>
 		                    <div className ='participationKills'>
 		                      <span> P/Kills {participationKills} %</span>
 		                    </div>

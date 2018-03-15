@@ -35,7 +35,7 @@ class SummonerMatchItemParticipant extends Component {
                         <img className="participant-img" height = '16px' key= { gameId + participant[2] + i} alt ='championIcon' src = {participant[2]} />
                         <Link className="participant-url" to={`/player/${participant[1]}`}>
                             <span key= { gameId + participant[1] + i} className  = { participant[3] ? 'target' : null}>
-                                {participant[1]}
+                                { participant[1].length > 13 ? participant[1].substr(0,12) + '...' : participant[1] }
                             </span>
                         </Link>
                      </li>

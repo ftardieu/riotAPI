@@ -20,8 +20,8 @@ class Summoner extends Component {
     sumLeagueInfo: null,
     sumMatchList: null,
     startIndex : 0,
-    endIndex : 2,
-    addCount : 2 , 
+    endIndex : 1,
+    addCount : 1 ,
     favorites : JSON.parse(localStorage.getItem('favorites'))
   }
 
@@ -29,7 +29,7 @@ class Summoner extends Component {
 
   getsummonerLeagueInfo = async (id) => {
     
-    const response = await api.getSummonerLeague('euw1', id)
+    const response = await api.getSummonerLeague(id)
     const sumLeagueInfo = await response.json()
     this.setState({  sumLeagueInfo })
 
@@ -45,10 +45,10 @@ class Summoner extends Component {
       indexE = endIndex + addCount
       indexS = startIndex + addCount
     }else{
-      indexE = 2
+      indexE = 1
       indexS = 0
     }
-    const response2 = await api.getSummonerMatches('euw1' , accountId , indexS, indexE)
+    const response2 = await api.getSummonerMatches(accountId , indexS, indexE)
     const sumMatchList = await response2.json()
 
     this.setState({ id ,accountId , sumMatchList, endIndex : indexE , startIndex  : indexS })
@@ -118,35 +118,35 @@ class Summoner extends Component {
     }
 
   render(){
-    const { sumLeagueInfo ,id  , sumMatchList } = this.state;
-    const { name, profileIconId, summonerLevel  } = this.props.sumData;
-    const profileIcon  = api.getSummonerProfileIcon(profileIconId)
-    return(
-      <React.Fragment>
-       <div className='summoner-info col-xs-12'>
-           <div className="summoner-face">
-               <Image className="summoner-icon" alt='profileIcon' src={profileIcon} thumbnail />
-           </div>
-           <div className="summoner-profile col-xs-8">
-               <div className="summoner-information">
-                   <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
-                   <Badge className="summoner-level">{summonerLevel}</Badge>
-
-                   {this.isFavoris() ? <button onClick={this.onClickDeleteLocal}><span className="glyphicon glyphicon-star"></span></button> : <button onClick={this.handleClickLocal}><span className="glyphicon glyphicon-star-empty"></span></button>}
+      const { sumLeagueInfo ,id  , sumMatchList } = this.state;
+      const { name, profileIconId, summonerLevel  } = this.props.sumData;
+      const profileIcon  = api.getSummonerProfileIcon(profileIconId)
+      return(
+          <React.Fragment>
+           <div className='summoner-info col-xs-12'>
+               <div className="summoner-face">
+                   <Image className="summoner-icon" alt='profileIcon' src={profileIcon} thumbnail />
                </div>
-               <SummonerLeague className="col-xs-12" sumLeagueInfo={sumLeagueInfo} id={id}/>
+               <div className="summoner-profile col-xs-8">
+                   <div className="summoner-information">
+                       <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
+                       <Badge className="summoner-level">{summonerLevel}</Badge>
+
+                       {this.isFavoris() ? <button className="fav-btn" onClick={this.onClickDeleteLocal}><img className="fav-btn-img" src="https://vignette.wikia.nocookie.net/leagueoflegends/images/8/8f/Poro_Luv_Emote.png/revision/latest?cb=20170812223500"/></button> : <button className="fav-btn" onClick={this.handleClickLocal}><img className="fav-btn-img" src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/40/Oh_Snap_Poro_Emote.png/revision/latest?cb=20170812223503"/></button>}
+                   </div>
+                   <SummonerLeague className="col-xs-12" sumLeagueInfo={sumLeagueInfo} id={id}/>
+               </div>
            </div>
-       </div>
 
-        { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ?
-            <div className="col-xs-12">
-                <SummonerMatch name = {name} sumMatchList={sumMatchList} id={id} />
-                <button onClick={this.handleClick} className="btn btn-default" >More games.. </button>
-            </div> :
-            <BlankComponent />}
+            { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ?
+                <div className="col-xs-12">
+                    <SummonerMatch name = {name} sumMatchList={sumMatchList} id={id} />
+                    <button onClick={this.handleClick} className="btn btn-default" >More games.. </button>
+                </div> :
+                <BlankComponent />}
 
-      </React.Fragment>
-    )
+          </React.Fragment>
+      )
   }
 }
 

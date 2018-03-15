@@ -25,3 +25,26 @@ body {
     height: 2px;
     background: #cdd2d2;
 }
+
+.black {
+    font-weight: bold;
+    color: #555e5e;
+}
+
+.red {
+    font-weight: bold;
+    color: #c6443e;
+}
+
+.blue {
+    font-weight: bold;
+    color: #4aa1d2;
+}
+
+.bg-red {
+    background: #c6443e;
+}
+
+.navbar-form {
+    display: inline-block;
+}
