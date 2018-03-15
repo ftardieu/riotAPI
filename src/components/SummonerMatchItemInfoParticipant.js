@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {  Link } from "react-router-dom";
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import api from '../riotAPI'
 class SummonerMatchItemInfoParticipant extends Component {
 
@@ -138,74 +139,76 @@ class SummonerMatchItemInfoParticipant extends Component {
 	      var participationKills = isTeam1 ? Math.round( (kills + assists) / sumTeam1Kills *100 )  :  Math.round( (kills + assists) / sumTeam2Kills *100 )
 	    }
 
+        const tooltip = (
+			<Tooltip id="tooltip">
+				<span>{ championName }</span>
+			</Tooltip>
+        );
+
+
 		return(
 			<React.Fragment>
 
-				<tr>
+				<tr className="participant-row">
 					<td>
-					    <div className = "gameSettingInfo">
-		                    <div>
-		                      <div className ='summonerChamp'>
-		                        <img height = '40px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}></img>
-		                      </div>
-		                      <div className ="summonerSpell">
-		                        <div className ='spell'>
-		                          <img height = '20px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}></img>
-		                        </div>
-		                        <div className ='spell'>
-		                          <img height = '20px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}></img>
-		                        </div>
-		                      </div>
-		                      <div className='summonerRune'>
-		                        <div className ='rune'>
-		                          <img height = '20px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} ></img>
-		                        </div>
-		                        <div className ='rune'>
-		                          <img height = '20px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} ></img>
-		                        </div>
-		                      </div>
-		                      <div>
-		                        <span>{ championName }</span>
-		                      </div>
-		                    </div>
-                 		</div>
-                 		<div className = 'summonerName' className  = { team[3] ? 'target' : null}> {team[1]}</div>
-
+						<div className = "gameSettingInfo">
+							  <div className ='summoner-champ-summary'>
+								  <OverlayTrigger placement="right" overlay={tooltip}>
+									<img height = '32px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}/>
+								  </OverlayTrigger>
+								  <div className ='summoner-level-summary'>
+									  <span>{champLevel}</span>
+								  </div>
+							  </div>
+							  <div className ="summoner-spell-summary">
+								<div className ='spell'>
+								  <img height = '20px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}/>
+								</div>
+								<div className ='spell'>
+								  <img height = '20px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}/>
+								</div>
+							  </div>
+							  <div className='summoner-rune-summary'>
+								<div className ='rune'>
+								  <img height = '20px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} />
+								</div>
+								<div className ='rune'>
+								  <img height = '20px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} />
+								</div>
+							  </div>
+							</div>
+						<div className ={ 'summonerName ' + (team[3] ? 'target' : '')} > {team[1]}</div>
 					</td>
 
 					<td>
 						{items ? 
-		                    <div className ='summonerItemsList'>
-	                      <div className ='summonerItems'>
-	                       
+		                    <div className ='summoner-items-list'>
+	                      		<div className ='summoner-items'>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
+								  </div>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
+								  </div>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
+								  </div>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
+								  </div>
 
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
-	                          </div>                  
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
-	                          </div>                  
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
-	                          </div>     
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
-	                          </div> 
-	                       
-	                       
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
-	                          </div>                  
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
-	                          </div>                  
-	                          <div className = "summonerItem" >
-	                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
-	                          </div>
-	                        </div>
-	                      
-	                    </div> : null }
 
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
+								  </div>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
+								  </div>
+								  <div className = "summonerItem" >
+									   <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
+								  </div>
+	                        	</div>
+							</div> : null }
 					</td>
 					<td>
 	                    <div className = "KDA">
@@ -224,15 +227,8 @@ class SummonerMatchItemInfoParticipant extends Component {
 					<td>{ totalDamageDealtToChampions }</td>
 					<td>
 	                    <div className= "statsChamp" >
-                    
-		                    <div className ='level'>
-		                      <span>Level {champLevel}</span>
-
-		                    </div>
-		                    
-		                    <div className ='cs'>
+		                    <div className='cs'>
 		                      <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
-
 		                    </div>                  
 		                    <div className ='participationKills'>
 		                      <span> P/Kills {participationKills} %</span>

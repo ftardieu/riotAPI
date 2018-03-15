@@ -69,7 +69,7 @@ class SummonerMatchItem extends Component {
       let visionWardsBoughtInGame
       let wardsKilled
       let wardsPlaced
-      let items 
+      let items
     for (var i = sumMatchItemInfo.participants.length - 1; i >= 0; i--) {
       let isSummonerTarget = false
       let isWin = sumMatchItemInfo.participants[i].stats.win
@@ -146,16 +146,45 @@ class SummonerMatchItem extends Component {
 
   }
  
-  componentWillReceiveProps (nextProps) {
-    if(this.state.gameId !== nextProps.gameId || this.state.name !== nextProps.name){ 
-      this.getSummonerInfoMatch( nextProps.gameId)
+    componentWillReceiveProps (nextProps) {
+        if(this.state.gameId !== nextProps.gameId || this.state.name !== nextProps.name){
+          this.getSummonerInfoMatch( nextProps.gameId)
 
+        }
     }
-  }
 
 
     handleDropDownMatch = async () => {
-      this.setState({toggleMatch : !this.state.toggleMatch})
+        this.setState({toggleMatch : !this.state.toggleMatch})
+    }
+
+    timeSince = (timeStamp) => {
+        var timeAgo = new Date(timeStamp)
+        var seconds = Math.floor((new Date() - timeAgo) / 1000),
+            intervals = [
+                Math.floor(seconds / 31536000),
+                Math.floor(seconds / 2592000),
+                Math.floor(seconds / 86400),
+                Math.floor(seconds / 3600),
+                Math.floor(seconds / 60)
+            ],
+            times = [
+                'year',
+                'month',
+                'day',
+                'hour',
+                'minute'
+            ];
+
+        var key;
+        for(key in intervals) {
+            if (intervals[key] > 1)
+                return intervals[key] + ' ' + times[key] + 's ago';
+            else if (intervals[key] === 1)
+                return intervals[key] + ' ' + times[key] + ' ago';
+        }
+
+        return Math.floor(seconds) + ' seconds ago';
     }
  
 
@@ -163,11 +192,12 @@ class SummonerMatchItem extends Component {
     const { team1 , team2 , gameId , sumMatchItemInfo, isSummonerWin , summonerIcon , summonerSpellName1 , summonerSpellName2  , perk , perkSubStyle , kills ,deaths ,assists , champLevel , 
      items , csNumber , csNumberNeutral , isTeam1 , sumTeam1Kills , sumTeam2Kills  , wardsPlaced , wardsKilled  , visionWardsBoughtInGame, championName , toggleMatch} = this.state
     if (sumMatchItemInfo) {
-      const { gameDuration } = sumMatchItemInfo
+      const { gameDuration, gameCreation } = sumMatchItemInfo
       var quotient = Math.floor(gameDuration/60);
       var remainder = gameDuration % 60;
       var gameResult =  isSummonerWin ? 'Victory' : 'Defeat' 
       var gameMode = api.getGameMode(sumMatchItemInfo.queueId)
+      var gameRelativeCreation = this.timeSince(gameCreation)
       
       var perkImg = "../images/perk/" + perk +'.png'
       var perkSubStyleImg = "../images/perkStyle/" + perkSubStyle + '.png'
@@ -180,123 +210,126 @@ class SummonerMatchItem extends Component {
     }
 
     return(
-      <div className = 'col-xs-12'>
+      <div className = 'col-xs-12 game-content'>
         <div className = { (isSummonerWin ? 'gameWin' : 'gameLose') + ' matchItem' } data-game-id = {gameId} >
 
        
-            { sumMatchItemInfo ? 
-              <div className="matchContent">
-                  <div className = "gameInfo" >
-                    <div> {gameMode}</div>
-                    <div> { quotient }m {remainder}s </div>
-                    <div>  {gameResult} </div>
-                  </div>
-
-                  <div className = "gameSettingInfo">
-                    <div>
-                      <div className ='summonerChamp'>
-                        <img height = '50px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon}></img>
+            { sumMatchItemInfo ?
+                <React.Fragment>
+                  <div className="matchContent">
+                      <div className = "gameInfo" >
+                          <div><strong>{gameMode}</strong></div>
+                          <div> { gameRelativeCreation }</div>
+                          <div className="bar"></div>
+                          <div> { quotient }m {remainder}s </div>
+                          <div>  {gameResult} </div>
                       </div>
-                      <div className ="summonerSpell">
-                        <div className ='spell'>
-                          <img height = '25px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1}></img>
-                        </div>
-                        <div className ='spell'>
-                          <img height = '25px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2}></img>
-                        </div>
-                      </div>
-                      <div className='summonerRune'>
-                        <div className ='rune'>
-                          <img height = '25px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} ></img>
-                        </div>
-                        <div className ='rune'>
-                          <img height = '25px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} ></img>
-                        </div>
-                      </div>
-                      <div>
-                        <span>{ championName }</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className = "KDA">
-                    <div className="stat">
-                      <span className="black">{ kills }</span> /
-                      <span className="red"> { deaths }</span> /
-                      <span className="black"> { assists }</span>
-                    </div>
-                    <div className ="statRatio">
-                      <span> {kda.trim()} KDA </span>
-                    </div>
 
-                  </div>
-                  <div className= "statsChamp" >
-                    
-                    <div className ='level'>
-                      <span>Level {champLevel}</span>
-
-                    </div>
-                    
-                    <div className ='cs'>
-                      <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
-
-                    </div>                  
-                    <div className ='participationKills'>
-                      <span> P/Kills {participationKills} %</span>
-                    </div>
-
-                  </div>
-                  { items ? 
-                    <div className ='summonerItemsList'>
-                      <div className ='summonerItems'>
-                        <div >
-
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
-                          </div>                  
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
-                          </div>                  
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
-                          </div>     
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
-                          </div> 
-                        </div> 
+                      <div className = "gameSettingInfo">
                         <div>
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
-                          </div>                  
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
-                          </div>                  
-                          <div className = "summonerItem" >
-                               <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
+                          <div className ='summonerChamp'>
+                            <img height = '50px' alt ='championIcon' className ="summonerIcon" src = {summonerIcon} />
+                          </div>
+                          <div className ="summonerSpell">
+                            <div className ='spell'>
+                              <img height = '25px' alt ='summonerSpell1' className ="summonerSpell" src = {summonerSpellName1} />
+                            </div>
+                            <div className ='spell'>
+                              <img height = '25px' alt ='summonerSpell2' className ="summonerSpell" src = {summonerSpellName2} />
+                            </div>
+                          </div>
+                          <div className='summonerRune'>
+                            <div className ='rune'>
+                              <img height = '25px' alt ='summonerRune1' className ="summonerRune" src = {perkImg} />
+                            </div>
+                            <div className ='rune'>
+                              <img height = '25px' alt ='summonerRune2' className ="summonerRune" src = {perkSubStyleImg} />
+                            </div>
+                          </div>
+                          <div>
+                            <span>{ championName }</span>
                           </div>
                         </div>
                       </div>
-                  </div> : null }
-               { visionWardsBoughtInGame >=0 && wardsPlaced >= 0 && wardsKilled >= 0 ? 
-               <div className ="summonerWards" >
-                  <div className='ward'>
-                    <div>
-                        <span>{visionWardsBoughtInGame}</span>
-                     </div>
-                    <div>
-                      <span>{wardsPlaced + "/" + wardsKilled}</span>
-                     </div>
-                  </div>
-               </div>
-               : null }
-                <div className = 'gameParticipant'>
-                  <SummonerMatchItemParticipant key = {gameId + 'team1'}  id ={this.props.id} gameId = {gameId} team = { team1 }  />   
-                  <SummonerMatchItemParticipant key = {gameId + 'team2'}  id ={this.props.id} gameId = {gameId}  team = { team2 }  /> 
-                </div>  
-                <div className = "dropDownMatch" >
-                  <button onClick = {this.handleDropDownMatch}> <i className ="  glyphicon glyphicon-menu-down" ></i></button>
-                </div>
+                      <div className = "KDA">
+                        <div className="stat">
+                          <span className="black">{ kills }</span> /
+                          <span className="red"> { deaths }</span> /
+                          <span className="black"> { assists }</span>
+                        </div>
+                        <div className ="statRatio">
+                          <span> {kda.trim()} KDA </span>
+                        </div>
 
-              </div>
+                      </div>
+                      <div className= "statsChamp" >
+
+                        <div className ='level'>
+                          <span>Level {champLevel}</span>
+
+                        </div>
+
+                        <div className ='cs'>
+                          <span>{totalCs + " (" + totalCsPerMinute + ") CS" }</span>
+
+                        </div>
+                        <div className ='participationKills'>
+                          <span> P/Kills {participationKills} %</span>
+                        </div>
+
+                      </div>
+                      { items ?
+                        <div className ='summonerItemsList'>
+                          <div className ='summonerItems'>
+                            <div >
+
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className="item" src = {items[0]} />
+                              </div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[1]} />
+                              </div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[2]} />
+                              </div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[6]} />
+                              </div>
+                            </div>
+                            <div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[3]} />
+                              </div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[4]} />
+                              </div>
+                              <div className = "summonerItem" >
+                                   <img height = '25px' alt ='summonerItem' className ="item" src = {items[5]} />
+                              </div>
+                            </div>
+                          </div>
+                      </div> : null }
+                   { visionWardsBoughtInGame >=0 && wardsPlaced >= 0 && wardsKilled >= 0 ?
+                   <div className ="summonerWards" >
+                      <div className='ward'>
+                        <div>
+                            <span>{visionWardsBoughtInGame}</span>
+                         </div>
+                        <div>
+                          <span>{wardsPlaced + "/" + wardsKilled}</span>
+                         </div>
+                      </div>
+                   </div>
+                   : null }
+                    <div className = 'gameParticipant'>
+                      <SummonerMatchItemParticipant key = {gameId + 'team1'}  id ={this.props.id} gameId = {gameId} team = { team1 }  />
+                      <SummonerMatchItemParticipant key = {gameId + 'team2'}  id ={this.props.id} gameId = {gameId}  team = { team2 }  />
+                    </div>
+                  </div>
+                  <div className = "dropDownMatch" >
+                        <button onClick = {this.handleDropDownMatch}> <i className={"glyphicon " + ( this.state.toggleMatch ? "glyphicon-menu-up" : "glyphicon-menu-down")} /></button>
+                    </div>
+                </React.Fragment>
          : null } 
 
         </div>

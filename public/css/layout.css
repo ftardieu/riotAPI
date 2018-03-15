@@ -18,10 +18,10 @@ body {
     background-color: #f8f8f8;
 }
 
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: 0;
-    width: auto !important;
-    margin-left: 0;
+.bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cdd2d2;
 }

@@ -126,11 +126,11 @@ class Summoner extends Component {
                <Image className="summoner-icon" alt='profileIcon' src={profileIcon} thumbnail />
            </div>
            <div className="summoner-profile col-xs-8">
-               <div>
+               <div className="summoner-information">
                    <span className="summoner-name">{ name.length > 13 ? name.substr(0,12) + '...' : name }</span>
                    <Badge className="summoner-level">{summonerLevel}</Badge>
 
-                    {this.isFavoris() ? <button onClick={this.onClickDeleteLocal}><span className="glyphicon glyphicon-star"></span></button> : <button onClick={this.handleClickLocal}><span className="glyphicon glyphicon-star-empty"></span></button>}
+                   {this.isFavoris() ? <button onClick={this.onClickDeleteLocal}><span className="glyphicon glyphicon-star"></span></button> : <button onClick={this.handleClickLocal}><span className="glyphicon glyphicon-star-empty"></span></button>}
                </div>
                <SummonerLeague className="col-xs-12" sumLeagueInfo={sumLeagueInfo} id={id}/>
            </div>
@@ -139,7 +139,7 @@ class Summoner extends Component {
         { sumMatchList && sumMatchList.matches && sumMatchList.matches.length > 0  ?
             <div className="col-xs-12">
                 <SummonerMatch name = {name} sumMatchList={sumMatchList} id={id} />
-                <button onClick={this.handleClick} className ="btn btn-default" >More games.. </button>
+                <button onClick={this.handleClick} className="btn btn-default" >More games.. </button>
             </div> :
             <BlankComponent />}
 

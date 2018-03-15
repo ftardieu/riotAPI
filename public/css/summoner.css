@@ -40,6 +40,10 @@
     border-radius: 2px;
 }
 
+.summoner-information {
+    margin-bottom: 10px;
+}
+
 /* SUMMONER RANKS */
 
 .summoner-ranks, .summoner-rank {
@@ -68,7 +72,7 @@
 }
 
 .rank-image.large {
-    margin-top: -8%;
+    margin-top: -3%;
     height: 100%;
 }
 

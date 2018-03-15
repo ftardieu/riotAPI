@@ -2,23 +2,68 @@
 }
 
 .matchItem {
-    padding: 10px;
     font-size: 11px;
-    margin: 5px 0;
+    height: 110px;
 }
 
 .matchContent {
-    display: table;
-    width: 100%;
+    display: inline-block;
+    width: calc(100% - 30px);
 }
+
+.dropDownMatch {
+    float: right;
+    width: 30px;
+    height: 100%;
+    border: 1px solid #4aa1d2;
+    position: relative;
+    background: #64b1e4;
+}
+
+.dropDownMatch button{
+    position: absolute;
+    background: #64b1e4;
+    bottom: 4px;
+    width: 100%;
+    -webkit-appearance: caret;
+}
+
+.gameLose .dropDownMatch {
+    border-color: #d67b77;
+    background: #e89d99;
+}
+
+.gameLose .dropDownMatch button {
+    background: #e89d99;
+}
+
+
+.game-content {
+    margin: 5px 0;
+}
+
 
 .gameInfo{
     display: inline-block;
+    text-align: center;
 }
 
 .gameInfo , .gameParticipant , .gameSettingInfo , .KDA , .statsChamp , .summonerItemsList , .summonerWards , .summonerName{
     display: table-cell;
     vertical-align: middle;
+    padding: 5px;
+}
+
+.gameLose .gameParticipant a {
+    color: #c6443e !important;
+}
+
+.gameWin .bar {
+    background: #99b9cf;
+}
+
+.gameLose .bar {
+    background: #cea7a7;
 }
 
 .gameWin {
@@ -30,11 +75,23 @@
     border: 1px solid #cea7a7;
 }
 .gameInfo {
-    width: 95px;
+    width: 150px;
+}
+
+.statsChamp {
+    width: 100px;
+}
+
+.gameParticipant .game-team{
+    width: 150px;
 }
 
 .gameSettingInfo {
     width: 145px;
+}
+
+.participant-row .gameSettingInfo {
+    width: auto;
 }
 
 .summonerIcon{
@@ -76,9 +133,14 @@
 
 .spell , .rune{
     display: block;
+    margin-right: 5px;
 }
 
-.summonerItems{
+.participant-row .spell, .participant-row .rune {
+    display: inline-block;
+}
+
+.summoner-items{
     display: table;
 }
 .gameitemList{
@@ -87,40 +149,88 @@
 /** END MATCHES **/
 
 .ulItemParticipant{
-list-style-type:none;
+    list-style-type:none;
+}
+
+.ulItemParticipant li {
+    margin-bottom: 5px;
+}
+
+.participant-img {
+    margin-right: 2px;
+}
+
+.participant-row {
+    height: 50px;
+}
+
+.participant-row td {
+    height: 50px;
 }
 
 .target{
-font-weight: bold;
+    font-weight: bold;
 }
-
 
 .btn-search{
   display:block;
 }
 
-.nameTableSum{
-  width: 20%
+.summoner-champ-summary, .summoner-spell-summary, .summoner-rune-summary {
+    display: inline-block;
 }
 
-.itemTableSum{
-  width: 40%
+.summoner-champ-summary {
+    position: relative;
+    margin-right: 5px;
 }
-.kdaTableSum{
+
+.summoner-level-summary {
+    position: absolute;
+    left: -3px;
+    bottom: -3px;
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    color: #ddd;
+    font-size: 10px;
+    opacity: 0.80;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 15px;
+}
+
+.name-table-summary{
+  width: 30%
+}
+
+.item-table-summary{
+  width: 30%
+}
+.kda-table-summary{
   width: 10%
 }
-.damageTableSum{
+.damage-table-summary{
   width: 10%
 }
-.csTableSum{
+.cs-table-summary{
   width: 10%
 }
-.goldTableSum{
+.gold-table-summary{
   width: 10%
 }
-#tableSum1{
+
+.summonerChamp {
+    margin-right: 5px;
+}
+
+.table-participants {
+    font-size: 11px;
+    margin-bottom: 0;
+}
+.table-participants-1 {
   background-color: #d8e4ec
 }
-#tableSum2{
+.table-participants-2 {
   background-color: #e9e0e0
 }
