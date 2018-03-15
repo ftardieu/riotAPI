@@ -121,6 +121,10 @@
     white-space: nowrap;
 }
 
+.stats .KDA .statRatio {
+    text-align: center;
+}
+
 .KDA .stat .black {
     font-weight: bold;
     color: #555e5e;

@@ -37,6 +37,7 @@ class riotAPI {
 			450 : "ARAM",
 			325 : "Normal",
 			400 : "Normal",
+			430 : "Normal",
 			820 : "Co-op VS Bot"
 
 		}

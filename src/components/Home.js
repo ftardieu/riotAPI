@@ -104,7 +104,8 @@ class Home extends Component {
         <div className="container">
             { !valid ?
               <div>
-                <div className="input-group col-lg-4 col-lg-offset-4 add-on">
+                  <img src="https://i.pinimg.com/originals/04/e6/96/04e696bacd8524e9da6f641727800e14.png" style={{height:"350px", margin: "0 auto",display: "block"}}/>
+                <div className="input-group col-lg-6 col-lg-offset-3 add-on">
                   <FormControl
                       required
                       autoFocus="true"
@@ -127,7 +128,7 @@ class Home extends Component {
                       <Link to={`/player/${favoris}`}>
                         <span >{favoris}</span>
                       </Link>
-                      <button onClick={(e) => this.onClickDeleteLocal(favoris)} ><i className = 'glyphicon glyphicon-star'></i></button>
+                      <button onClick={(e) => this.onClickDeleteLocal(favoris)} ><i className = 'glyphicon glyphicon-star' /></button>
                     </div>
                   )  
                   : null }

@@ -20,15 +20,15 @@ class Summoner extends Component {
     sumLeagueInfo: null,
     sumMatchList: null,
     startIndex : 0,
-    endIndex : 1,
-    addCount : 1 , 
+    endIndex : 2,
+    addCount : 2 , 
     favorites : JSON.parse(localStorage.getItem('favorites'))
   }
 
 
 
   getsummonerLeagueInfo = async (id) => {
-
+    
     const response = await api.getSummonerLeague('euw1', id)
     const sumLeagueInfo = await response.json()
     this.setState({  sumLeagueInfo })
@@ -38,13 +38,14 @@ class Summoner extends Component {
   getSummonerInfo = async(id,accountId, addCount = 0 , newSummoner = true) => {
 
     const { endIndex , startIndex} = this.state
+
     let indexE
     let indexS
     if (!newSummoner) {
       indexE = endIndex + addCount
       indexS = startIndex + addCount
     }else{
-      indexE = 1
+      indexE = 2
       indexS = 0
     }
     const response2 = await api.getSummonerMatches('euw1' , accountId , indexS, indexE)
@@ -57,6 +58,7 @@ class Summoner extends Component {
     this.getSummonerInfo( this.props.id ,   this.props.accountId)
     this.getsummonerLeagueInfo(  this.props.id )
   }
+  
   componentWillReceiveProps = async (nextProps) => {
     if(this.state.id !== nextProps.id  ){
       this.getSummonerInfo(nextProps.id, nextProps.accountId)
