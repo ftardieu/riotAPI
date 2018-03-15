@@ -1,8 +1,6 @@
 
 import React, { Component } from 'react';
-// import {  Row , Section ,Col} from 'react-materialize'
-// import api from '../riotAPI'
-// import SummonerLeague from './SummonerLeague'
+import {  Link } from "react-router-dom";
 
 class SummonerMatchItemParticipant extends Component {
 
@@ -26,25 +24,25 @@ class SummonerMatchItemParticipant extends Component {
 
     const { team , gameId } = this.props
     const style = {display: 'inline-block'}
+
     return(
       <React.Fragment>
-      		
-			<div style={style} >
-	  			{team.map((participant,i) =>
-	  				<React.Fragment key = {'react ' + gameId + i } >
-		  				<img height = '25px' key= { gameId + participant[1] + i} alt ='championIcon' src = {participant[1]}></img>
-		  				<span 
-                key= { gameId + participant[0] + i}
-                className  = { participant[2] ? 'target' : null}
-                > 
-                
-                {participant[0]}
-              </span>
-	  				</React.Fragment>
-	  			)}
-			</div>
-          
-      			
+          <div className="game-team" style = {style} >
+            <ul className='ulItemParticipant'>
+              {team.map((participant,i) =>
+                  <React.Fragment key = {'react ' + gameId + i } >
+                    <li>
+                        <img className="participant-img" height = '16px' key= { gameId + participant[2] + i} alt ='championIcon' src = {participant[2]} />
+                        <Link className="participant-url" to={`/player/${participant[1]}`}>
+                            <span key= { gameId + participant[1] + i} className  = { participant[3] ? 'target' : null}>
+                                { participant[1].length > 13 ? participant[1].substr(0,12) + '...' : participant[1] }
+                            </span>
+                        </Link>
+                     </li>
+                  </React.Fragment>
+              )}
+              </ul>
+          </div>
       </React.Fragment>
     )
   }

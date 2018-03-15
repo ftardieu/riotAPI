@@ -9,3 +9,42 @@
 .home-search {
     margin-top: 20%;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+body {
+    background-color: #f8f8f8;
+}
+
+.bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cdd2d2;
+}
+
+.black {
+    font-weight: bold;
+    color: #555e5e;
+}
+
+.red {
+    font-weight: bold;
+    color: #c6443e;
+}
+
+.blue {
+    font-weight: bold;
+    color: #4aa1d2;
+}
+
+.bg-red {
+    background: #c6443e;
+}
+
+.navbar-form {
+    display: inline-block;
+}

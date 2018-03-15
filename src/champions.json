@@ -1,6 +1,6 @@
 {
   "type": "champion",
-  "version": "8.4.1",
+  "version": "8.5.2",
   "data": {
     "1": {
       "image": {
@@ -25,7 +25,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 0
+        "x": 48
       },
       "title": "the Berserker",
       "id": 2,
@@ -55,7 +55,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 240
+        "x": 288
       },
       "title": "the Card Master",
       "id": 4,
@@ -70,7 +70,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 0
+        "x": 48
       },
       "title": "the Seneschal of Demacia",
       "id": 5,
@@ -85,7 +85,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 384
+        "x": 432
       },
       "title": "the Dreadnought",
       "id": 6,
@@ -96,11 +96,11 @@
       "image": {
         "full": "Leblanc.png",
         "group": "champion",
-        "sprite": "champion1.png",
+        "sprite": "champion2.png",
         "h": 48,
         "w": 48,
-        "y": 96,
-        "x": 432
+        "y": 0,
+        "x": 0
       },
       "title": "the Deceiver",
       "id": 7,
@@ -115,7 +115,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 240
+        "x": 288
       },
       "title": "the Crimson Reaper",
       "id": 8,
@@ -145,7 +145,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 96
+        "x": 144
       },
       "title": "The Judicator",
       "id": 10,
@@ -159,8 +159,8 @@
         "sprite": "champion2.png",
         "h": 48,
         "w": 48,
-        "y": 0,
-        "x": 432
+        "y": 48,
+        "x": 0
       },
       "title": "the Wuju Bladesman",
       "id": 11,
@@ -190,7 +190,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 144
+        "x": 192
       },
       "title": "the Rune Mage",
       "id": 13,
@@ -204,8 +204,8 @@
         "sprite": "champion3.png",
         "h": 48,
         "w": 48,
-        "y": 0,
-        "x": 432
+        "y": 48,
+        "x": 0
       },
       "title": "The Undead Juggernaut",
       "id": 14,
@@ -220,7 +220,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 0
+        "x": 48
       },
       "title": "the Battle Mistress",
       "id": 15,
@@ -235,7 +235,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 144
+        "x": 192
       },
       "title": "the Starchild",
       "id": 16,
@@ -250,7 +250,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 0
+        "x": 48
       },
       "title": "the Swift Scout",
       "id": 17,
@@ -265,7 +265,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 96
+        "x": 144
       },
       "title": "the Yordle Gunner",
       "id": 18,
@@ -280,7 +280,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 336
+        "x": 384
       },
       "title": "the Uncaged Wrath of Zaun",
       "id": 19,
@@ -294,8 +294,8 @@
         "sprite": "champion2.png",
         "h": 48,
         "w": 48,
-        "y": 48,
-        "x": 432
+        "y": 96,
+        "x": 0
       },
       "title": "the Yeti Rider",
       "id": 20,
@@ -310,7 +310,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 0
+        "x": 48
       },
       "title": "the Bounty Hunter",
       "id": 21,
@@ -340,7 +340,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 192
+        "x": 240
       },
       "title": "the Barbarian King",
       "id": 23,
@@ -370,7 +370,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 144
+        "x": 192
       },
       "title": "Fallen Angel",
       "id": 25,
@@ -385,7 +385,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 288
+        "x": 336
       },
       "title": "the Chronokeeper",
       "id": 26,
@@ -400,7 +400,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 384
+        "x": 432
       },
       "title": "the Mad Chemist",
       "id": 27,
@@ -430,7 +430,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 288
+        "x": 336
       },
       "title": "the Plague Rat",
       "id": 29,
@@ -444,8 +444,8 @@
         "sprite": "champion1.png",
         "h": 48,
         "w": 48,
-        "y": 48,
-        "x": 432
+        "y": 96,
+        "x": 0
       },
       "title": "the Deathsinger",
       "id": 30,
@@ -490,7 +490,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 336
+        "x": 384
       },
       "title": "the Armordillo",
       "id": 33,
@@ -520,7 +520,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 240
+        "x": 288
       },
       "title": "the Demon Jester",
       "id": 35,
@@ -550,7 +550,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 96
+        "x": 144
       },
       "title": "Maven of the Strings",
       "id": 37,
@@ -565,7 +565,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 0
+        "x": 48
       },
       "title": "the Void Walker",
       "id": 38,
@@ -640,7 +640,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 384
+        "x": 432
       },
       "title": "the Enlightened One",
       "id": 43,
@@ -654,8 +654,8 @@
         "sprite": "champion3.png",
         "h": 48,
         "w": 48,
-        "y": 48,
-        "x": 432
+        "y": 96,
+        "x": 0
       },
       "title": "the Shield of Valoran",
       "id": 44,
@@ -670,7 +670,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 48
+        "x": 96
       },
       "title": "the Tiny Master of Evil",
       "id": 45,
@@ -685,7 +685,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 144
+        "x": 192
       },
       "title": "the Troll King",
       "id": 48,
@@ -700,7 +700,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 192
+        "x": 240
       },
       "title": "the Noxian Grand General",
       "id": 50,
@@ -745,7 +745,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 288
+        "x": 336
       },
       "title": "Shard of the Monolith",
       "id": 54,
@@ -760,7 +760,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 48
+        "x": 96
       },
       "title": "the Sinister Blade",
       "id": 55,
@@ -775,7 +775,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 384
+        "x": 432
       },
       "title": "the Eternal Nightmare",
       "id": 56,
@@ -790,7 +790,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 384
+        "x": 432
       },
       "title": "the Twisted Treant",
       "id": 57,
@@ -801,11 +801,11 @@
       "image": {
         "full": "Renekton.png",
         "group": "champion",
-        "sprite": "champion2.png",
+        "sprite": "champion3.png",
         "h": 48,
         "w": 48,
-        "y": 96,
-        "x": 432
+        "y": 0,
+        "x": 0
       },
       "title": "the Butcher of the Sands",
       "id": 58,
@@ -850,7 +850,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 48
+        "x": 96
       },
       "title": "the Lady of Clockwork",
       "id": 61,
@@ -865,7 +865,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 48
+        "x": 96
       },
       "title": "the Monkey King",
       "id": 62,
@@ -895,7 +895,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 0
+        "x": 48
       },
       "title": "the Blind Monk",
       "id": 64,
@@ -910,7 +910,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 0
+        "x": 48
       },
       "title": "the Night Hunter",
       "id": 67,
@@ -925,7 +925,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 96
+        "x": 144
       },
       "title": "the Mechanized Menace",
       "id": 68,
@@ -955,7 +955,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 48
+        "x": 96
       },
       "title": "the Crystal Vanguard",
       "id": 72,
@@ -985,7 +985,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 240
+        "x": 288
       },
       "title": "the Curator of the Sands",
       "id": 75,
@@ -1000,7 +1000,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 336
+        "x": 384
       },
       "title": "the Bestial Huntress",
       "id": 76,
@@ -1015,7 +1015,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 336
+        "x": 384
       },
       "title": "the Spirit Walker",
       "id": 77,
@@ -1030,7 +1030,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 192
+        "x": 240
       },
       "title": "Keeper of the Hammer",
       "id": 78,
@@ -1060,7 +1060,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 144
+        "x": 192
       },
       "title": "the Artisan of War",
       "id": 80,
@@ -1090,7 +1090,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 96
+        "x": 144
       },
       "title": "the Iron Revenant",
       "id": 82,
@@ -1105,7 +1105,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 96
+        "x": 144
       },
       "title": "Shepherd of Souls",
       "id": 83,
@@ -1135,7 +1135,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 192
+        "x": 240
       },
       "title": "the Heart of the Tempest",
       "id": 85,
@@ -1165,7 +1165,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 48
+        "x": 96
       },
       "title": "the Radiant Dawn",
       "id": 89,
@@ -1180,7 +1180,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 336
+        "x": 384
       },
       "title": "the Prophet of the Void",
       "id": 90,
@@ -1195,7 +1195,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 384
+        "x": 432
       },
       "title": "the Blade's Shadow",
       "id": 91,
@@ -1210,7 +1210,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 48
+        "x": 96
       },
       "title": "the Exile",
       "id": 92,
@@ -1225,7 +1225,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 384
+        "x": 432
       },
       "title": "the Mouth of the Abyss",
       "id": 96,
@@ -1240,7 +1240,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 288
+        "x": 336
       },
       "title": "the Eye of Twilight",
       "id": 98,
@@ -1255,7 +1255,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 240
+        "x": 288
       },
       "title": "the Lady of Luminosity",
       "id": 99,
@@ -1269,8 +1269,8 @@
         "sprite": "champion4.png",
         "h": 48,
         "w": 48,
-        "y": 0,
-        "x": 432
+        "y": 48,
+        "x": 0
       },
       "title": "the Magus Ascendant",
       "id": 101,
@@ -1285,7 +1285,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 336
+        "x": 384
       },
       "title": "the Half-Dragon",
       "id": 102,
@@ -1345,7 +1345,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 288
+        "x": 336
       },
       "title": "the Thunder's Roar",
       "id": 106,
@@ -1360,7 +1360,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 0
+        "x": 48
       },
       "title": "the Pridestalker",
       "id": 107,
@@ -1371,11 +1371,11 @@
       "image": {
         "full": "Varus.png",
         "group": "champion",
-        "sprite": "champion3.png",
+        "sprite": "champion4.png",
         "h": 48,
         "w": 48,
-        "y": 96,
-        "x": 432
+        "y": 0,
+        "x": 0
       },
       "title": "the Arrow of Retribution",
       "id": 110,
@@ -1390,7 +1390,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 288
+        "x": 336
       },
       "title": "the Titan of the Depths",
       "id": 111,
@@ -1405,7 +1405,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 192
+        "x": 240
       },
       "title": "the Machine Herald",
       "id": 112,
@@ -1420,7 +1420,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 192
+        "x": 240
       },
       "title": "Fury of the North",
       "id": 113,
@@ -1450,7 +1450,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 240
+        "x": 288
       },
       "title": "the Hexplosives Expert",
       "id": 115,
@@ -1465,7 +1465,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 192
+        "x": 240
       },
       "title": "the Fae Sorceress",
       "id": 117,
@@ -1510,7 +1510,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 240
+        "x": 288
       },
       "title": "the Voidreaver",
       "id": 121,
@@ -1555,7 +1555,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 96
+        "x": 144
       },
       "title": "the Ice Witch",
       "id": 127,
@@ -1585,7 +1585,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 240
+        "x": 288
       },
       "title": "Demacia's Wings",
       "id": 133,
@@ -1600,7 +1600,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 240
+        "x": 288
       },
       "title": "the Dark Sovereign",
       "id": 134,
@@ -1630,7 +1630,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 144
+        "x": 192
       },
       "title": "the Shadow Reaper",
       "id": 141,
@@ -1645,7 +1645,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 336
+        "x": 384
       },
       "title": "the Aspect of Twilight",
       "id": 142,
@@ -1660,12 +1660,27 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 384
+        "x": 432
       },
       "title": "Rise of the Thorns",
       "id": 143,
       "key": "Zyra",
       "name": "Zyra"
+    },
+    "145": {
+      "image": {
+        "full": "Kaisa.png",
+        "group": "champion",
+        "sprite": "champion1.png",
+        "h": 48,
+        "w": 48,
+        "y": 48,
+        "x": 336
+      },
+      "title": "Daughter of the Void",
+      "id": 145,
+      "key": "Kaisa",
+      "name": "Kai'Sa"
     },
     "150": {
       "image": {
@@ -1690,7 +1705,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 144
+        "x": 192
       },
       "title": "the Secret Weapon",
       "id": 154,
@@ -1705,7 +1720,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 48
+        "x": 96
       },
       "title": "the Unforgiven",
       "id": 157,
@@ -1720,7 +1735,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 96
+        "x": 144
       },
       "title": "the Eye of the Void",
       "id": 161,
@@ -1735,7 +1750,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 336
+        "x": 384
       },
       "title": "the Stoneweaver",
       "id": 163,
@@ -1795,7 +1810,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 288
+        "x": 336
       },
       "title": "The Eternal Hunters",
       "id": 203,
@@ -1825,7 +1840,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 288
+        "x": 336
       },
       "title": "the River King",
       "id": 223,
@@ -1840,7 +1855,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 144
+        "x": 192
       },
       "title": "the Purifier",
       "id": 236,
@@ -1855,7 +1870,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 192
+        "x": 240
       },
       "title": "the Master of Shadows",
       "id": 238,
@@ -1870,7 +1885,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 336
+        "x": 384
       },
       "title": "the Cantankerous Cavalier",
       "id": 240,
@@ -1900,7 +1915,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 144
+        "x": 192
       },
       "title": "the Piltover Enforcer",
       "id": 254,
@@ -1930,7 +1945,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 192
+        "x": 240
       },
       "title": "the Tidecaller",
       "id": 267,
@@ -1960,7 +1975,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 48
+        "x": 96
       },
       "title": "the Chain Warden",
       "id": 412,
@@ -1990,7 +2005,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 384
+        "x": 432
       },
       "title": "the Void Burrower",
       "id": 421,
@@ -2020,7 +2035,7 @@
         "h": 48,
         "w": 48,
         "y": 48,
-        "x": 336
+        "x": 384
       },
       "title": "the Spear of Vengeance",
       "id": 429,
@@ -2050,7 +2065,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 288
+        "x": 336
       },
       "title": "The Charmer",
       "id": 497,
@@ -2065,7 +2080,7 @@
         "h": 48,
         "w": 48,
         "y": 0,
-        "x": 384
+        "x": 432
       },
       "title": "the Rebel",
       "id": 498,
@@ -2080,7 +2095,7 @@
         "h": 48,
         "w": 48,
         "y": 96,
-        "x": 96
+        "x": 144
       },
       "title": "The Fire below the Mountain",
       "id": 516,

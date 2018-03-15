@@ -1,23 +1,5 @@
-.summoner-info {
-    display: inline-block;
-}
-
-.summoner-face {
-    display: inline-block;
-    margin-right: 20px;
-    position: relative;
-}
-
-.summoner-profile {
-    display: inline-block;
-    position: relative;
-    height: 100px;
-    vertical-align: top;
-    line-height: 1.1;
-}
-
 .summoner-icon {
-    height: 125px;
+    height: 150px;
     display: block;
 }
 
@@ -28,38 +10,87 @@
 }
 
 .summoner-level {
-    color: #d3a625;
+    /*color: #d3a625;*/
     font-weight: bold;
-    background-color: #740001;
-    border: 1px solid #d3a625;
+    margin-left: 1%;
+}
+
+.summoner-info {
+    display: flex;
+    max-height: 150px;
+    margin-bottom: 2%;
+}
+
+.summoner-face {
+    margin-right: 5px;
+    position: relative;
+    box-shadow: 0 1px #dcdfdf;
+}
+
+.summoner-profile {
+    position: relative;
+    flex: 1;
+    vertical-align: top;
+    padding: 15px;
+    margin-left: 5px;
+    line-height: 1.1;
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+}
+
+.summoner-information {
+    margin-bottom: 10px;
+}
+
+.fav-btn {
+    -webkit-appearance: searchfield-cancel-button;
+}
+
+.fav-btn-img {
+    height: 30px;
     position: absolute;
-    top: 81%;
-    font-size: 14.5px !important;
-    right: 0;
-    padding: 0 5px;
+    top: 10px;
 }
 
 /* SUMMONER RANKS */
 
+.summoner-ranks, .summoner-rank {
+    height: 90%;
+}
+
 .summoner-rank {
-    height: 75px;
+    display: inline-block;
 }
 
-.summoner-rank .summoner-solo-rank {
+.summoner-rank div {
     height: 100%;
-    display: inline-block;
 }
 
-.summoner-rank .summoner-team-rank {
-    height: 50%;
+.rank-info span {
+    display: block;
+}
+
+.summoner-rank img {
+    height: 80%;
+}
+
+.rank-info {
     display: inline-block;
+    vertical-align: top;
 }
 
 .rank-image.large {
-    height: 100px;
+    margin-top: -3%;
+    height: 100%;
 }
 
 .rank-image.small {
     height: 50px;
+}
+
+.rank-stats {
+    font-size: x-small;
 }
 /* END SUMMONER RANKS */

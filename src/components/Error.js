@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {  Section , Row } from 'react-materialize'
 import {staticDataServer} from '../config' ;
+import api from '../riotAPI'
 
 class Error extends Component {
 
@@ -26,13 +26,9 @@ class Error extends Component {
 
 
   render() {
-    
+    const currentServer = api.getServers()[api.getCurrentServer()]
     return (
-      <Section>
-        <Row >
-          <h3>Summoner not found on {staticDataServer}</h3>
-       </Row>
-      </Section>
+        <h3>Summoner not found on {currentServer}</h3>
     );
   }
 }
